@@ -1,0 +1,64 @@
+/* רקע לבן, עיצוב עדין לעמוד השלמת פרטים */
+body {
+  background-color: #ffffff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  text-align: center;
+  color: #0077cc; /* תכלת כהה */
+  margin-top: 40px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 30px;
+  border: 1px solid #cce6ff;
+  border-radius: 10px;
+  background-color: #f0f8ff; /* תכלת בהיר */
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+input {
+  width: 90%;
+  padding: 12px 15px;
+  margin: 10px 0;
+  border: 1px solid #b3d9ff;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+  transition: border 0.3s;
+}
+
+input:focus {
+  border: 1px solid #0077cc;
+}
+
+button {
+  width: 95%;
+  padding: 12px;
+  margin-top: 15px;
+  background-color: #0077cc;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background-color: #005fa3;
+}
+
+p {
+  text-align: center;
+  color: red;
+  margin-top: 10px;
+}
