@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { getUsers } from "../API/usersApi";
+import { MyContext } from "../context";
 import "../css/login.css";
 
 function Login() {
+  const { setCurrentUser } = useContext(MyContext);
   const [form, setForm] = useState({
     username: "",
     password: ""
@@ -24,7 +26,6 @@ function Login() {
 
     try {
       const users = await getUsers();
-
       const user = users.find(
         u => u.username === form.username && u.website === form.password
       );
@@ -35,7 +36,9 @@ function Login() {
       }
 
       localStorage.setItem("currentUser", JSON.stringify(user));
-      navigate("/home");
+      setCurrentUser(user);
+      console.log("fdsfvfdb")
+      navigate(`/home/users/${user.id}`);
 
     } catch (err) {
       setError("שגיאה בהתחברות לשרת");

@@ -1,5 +1,10 @@
-const Home = () => {
-  return <h1>שלום!</h1>;
-};
+import Header from "../components/Header";
+function Home() {
 
+    return (
+        <div>
+            <Header></Header>
+        </div>
+    );
+}
 export default Home;

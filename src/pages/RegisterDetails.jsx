@@ -1,10 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { createUser } from "../API/usersApi";
 import "../css/registerdetails.css";
+import { MyContext } from "../context";
 
 
 function RegisterDetails() {
+  const { setCurrentUser } = useContext(MyContext);
   const navigate = useNavigate();
   const location = useLocation();
   const authUser = location.state?.authUser;
@@ -38,8 +40,8 @@ function RegisterDetails() {
     try {
       const fullUser = {
         ...authUser,
-        email:userDetails.email,
-        name:userDetails.name,
+        email: userDetails.email,
+        name: userDetails.name,
         address: {
           street: userDetails.street,
           suite: userDetails.suite,
@@ -49,10 +51,11 @@ function RegisterDetails() {
         }
       };
 
-      const createdUser = await createUser(fullUser); 
+      const createdUser = await createUser(fullUser);
 
       localStorage.setItem("currentUser", JSON.stringify(createdUser));
-      navigate(`/home/${createdUser.id}/users`);
+      setCurrentUser(createdUser);
+      navigate(`/home/users/${createdUser.id}`);
 
     } catch (err) {
       setError(err.message);
