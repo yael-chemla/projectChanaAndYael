@@ -1,5 +1,4 @@
 
-// GET - מביא את כל המשתמשים
 export const getUsers = async () => {
   try {
     const response = await fetch('http://localhost:3000/users');
@@ -11,7 +10,6 @@ export const getUsers = async () => {
   }
 };
 
-// POST - יוצר משתמש חדש
 export const createUser = async (user) => {
   try {
     const response = await fetch('http://localhost:3000/users', {

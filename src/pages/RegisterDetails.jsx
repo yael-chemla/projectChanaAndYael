@@ -38,7 +38,8 @@ function RegisterDetails() {
     try {
       const fullUser = {
         ...authUser,
-        ...userDetails,
+        email:userDetails.email,
+        name:userDetails.name,
         address: {
           street: userDetails.street,
           suite: userDetails.suite,
