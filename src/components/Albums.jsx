@@ -4,90 +4,49 @@ import { getAlbumsByUser } from "../API/albumsApi";
 import { getPhotosByAlbum } from "../API/photosApi";
 
 function Albums() {
-    const { currentUser } = useContext(MyContext);
+  const { currentUser } = useContext(MyContext);
+  const [albums, setAlbums] = useState([]);
+  const [photos, setPhotos] = useState([]);
+  const [selectedAlbumId, setSelectedAlbumId] = useState(null);
 
-    const [albums, setAlbums] = useState([]);
-    const [photos, setPhotos] = useState([]);
-    const [showAlbums, setShowAlbums] = useState(false);
-    const [selectedAlbumId, setSelectedAlbumId] = useState(null);
+  useEffect(() => {
+    if (!currentUser) return;
 
-    useEffect(() => {
-        if (!currentUser) return;
+    getAlbumsByUser(currentUser.id).then(setAlbums);
+  }, [currentUser]);
 
-        const fetchAlbums = async () => {
-            const data = await getAlbumsByUser(currentUser.id);
-            setAlbums(data);
-        };
+  const handleAlbumClick = async (albumId) => {
+    setSelectedAlbumId(albumId);
+    const albumPhotos = await getPhotosByAlbum(albumId);
+    setPhotos(albumPhotos);
+  };
 
-        fetchAlbums();
-    }, [currentUser]);
+  return (
+    <div>
+      <h2>{currentUser?.name}'s Albums</h2>
+      <ul>
+        {albums.map(album => (
+          <li key={album.id} onClick={() => handleAlbumClick(album.id)} style={{ cursor: "pointer", fontWeight: "bold" }}>
+            {album.title}
+          </li>
+        ))}
+      </ul>
 
-    const handleAlbumClick = async (albumId) => {
-        setSelectedAlbumId(albumId);
-        const albumPhotos = await getPhotosByAlbum(albumId);
-        setPhotos(albumPhotos);
-    };
-
-    return (
-        <div>
-            <button
-                onClick={() => {
-                    setShowAlbums(prev => {
-                        const newValue = !prev;
-
-                        if (!newValue) {
-                            setSelectedAlbumId(null);
-                            setPhotos([]);
-                        }
-
-                        return newValue;
-                    });
-                }}
-            >
-                ALBUMS
-            </button>
-
-
-            {showAlbums && (
-                <ul>
-                    {albums.map(album => (
-                        <li
-                            key={album.id}
-                            onClick={() => handleAlbumClick(album.id)}
-                            style={{ cursor: "pointer", fontWeight: "bold" }}
-                        >
-                            {album.title}
-                        </li>
-                    ))}
-                </ul>
-            )}
-
-            {selectedAlbumId && (
-                <div
-                    style={{
-                        display: "flex",
-                        flexWrap: "wrap",
-                        gap: "10px"
-                    }}
-                >
-                    {photos.map(photo => (
-                        <img
-                            key={photo.id}
-                            src={photo.url}          // משתמשים בתמונה האמיתית
-                            alt={photo.title}
-                            style={{
-                                width: "150px",
-                                height: "150px",
-                                objectFit: "cover",
-                                borderRadius: "8px"
-                            }}
-                        />
-                    ))}
-                </div>
-            )}
-
+      {selectedAlbumId && (
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
+          {photos.map(photo => (
+            <img
+              key={photo.id}
+              src={photo.url}
+              alt={photo.title}
+              style={{ width: "150px", height: "150px", objectFit: "cover", borderRadius: "8px" }}
+            />
+          ))}
         </div>
-    );
+      )}
+    </div>
+  );
 }
 
 export default Albums;
+

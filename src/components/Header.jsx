@@ -1,40 +1,42 @@
 import { useContext } from "react";
-import { MyContext } from "../context";
 import { useNavigate } from "react-router-dom";
-import Info from "./Info";
-import Todos from "./Todos";
-import Albums from "./Albums";
-
-
+import { MyContext } from "../context";
+import "../css/header.css";
 
 function Header() {
-  const navigate = useNavigate();
-  const { currentUser, setCurrentUser } = useContext(MyContext);
+    const navigate = useNavigate();
+    const { currentUser, setCurrentUser } = useContext(MyContext);
 
-  const handleLogout = () => {
-    localStorage.removeItem("currentUser");
-    setCurrentUser(null); // נעדכן את ה-context
-    navigate("/login");
-  };
+    if (!currentUser) return null;
 
-  return (
-    <header className="app-header">
-      <div className="user-info">
-        <span className="user-name">{currentUser.name}</span>
-      </div>
+    const handleLogout = () => {
+        localStorage.removeItem("currentUser");
+        setCurrentUser(null);
+        navigate("/login");
+    };
 
-      <div className="left">
-        <Todos/>
-      </div>
+    const goTo = (path) => navigate(path);
 
-      <div className="right">
-        <button onClick={handleLogout}>Logout</button>
-        <Info />
-        <Albums/>
-      </div>
+    return (
+        <header className="app-header">
+            <div className="user-info">
+                שלום, <strong>{currentUser.name}</strong>
+            </div>
 
-    </header>
-  );
+            <div className="menu">
+                <button onClick={() => goTo(`/home/users/${currentUser.id}/todos`)}>Todos</button>
+                <button onClick={() => goTo(`/home/users/${currentUser.id}/albums`)}>Albums</button>
+                <button onClick={() => goTo(`/home/users/${currentUser.id}/info`)}>Info</button>
+            </div>
+
+            <div>
+                <button onClick={handleLogout} className="logout-button">
+                    Logout
+                </button>
+            </div>
+        </header>
+    );
 }
 
 export default Header;
+
