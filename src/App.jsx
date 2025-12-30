@@ -7,6 +7,8 @@ import Home from "../src/pages/Home"
 import Todos from "../src/components/Todos"
 import Albums from "../src/components/Albums"
 import Info from "../src/components/Info"
+import Posts from "../src/components/Posts"
+
 import './App.css'
 function App() {
 
@@ -24,6 +26,7 @@ function App() {
               <Route path="todos" element={<Todos />} />
               <Route path="albums" element={<Albums />} />
               <Route path="info" element={<Info />} />
+              <Route path="posts" element={<Posts />} />
             </Route>
           </Routes>
         </BrowserRouter>

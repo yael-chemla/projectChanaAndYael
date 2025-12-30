@@ -1,21 +1,25 @@
-import { useEffect, useState } from 'react';
-import { getPosts } from "../API/postsApi";
-function Posts() {
-  const [posts, setPosts] = useState([]);
+import { useContext, useEffect, useState } from "react";
+import { MyContext } from "../context";
+import { getPostsByUser } from "../API/postsApi";
 
-  // שימוש ב-`useEffect` כדי לשלוף את הנתונים כשהרכיב נטען
+function Posts() {
+  const { currentUser } = useContext(MyContext);
+  const [Posts, setPosts] = useState([]);
+
+
   useEffect(() => {
-    getPosts().then(data => setPosts(data));
-  }, []);
+    if (!currentUser) return;
+
+    getPostsByUser(currentUser.id).then(setPosts);
+  }, [currentUser]);
 
   return (
     <div>
-      <h2>Posts from API</h2>
+      <h2>{currentUser?.name}'s Posts</h2>
       <ul>
-        {posts.map(post => (
+        {Posts.map(post => (
           <li key={post.id}>
-            <h3>{post.title}</h3>
-            <p>{post.body}</p>
+            {post.title} {post.body}
           </li>
         ))}
       </ul>

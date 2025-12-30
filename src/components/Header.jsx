@@ -19,20 +19,16 @@ function Header() {
 
     return (
         <header className="app-header">
-            <div className="user-info">
-                שלום, <strong>{currentUser.name}</strong>
+            <div className="user-info-logout">
+                <span>hello, <strong>{currentUser.name}</strong></span>
+                <button onClick={handleLogout} className="logout-button">Logout</button>
             </div>
 
             <div className="menu">
                 <button onClick={() => goTo(`/home/users/${currentUser.id}/todos`)}>Todos</button>
                 <button onClick={() => goTo(`/home/users/${currentUser.id}/albums`)}>Albums</button>
                 <button onClick={() => goTo(`/home/users/${currentUser.id}/info`)}>Info</button>
-            </div>
-
-            <div>
-                <button onClick={handleLogout} className="logout-button">
-                    Logout
-                </button>
+                <button onClick={() => goTo(`/home/users/${currentUser.id}/posts`)}>Posts</button>
             </div>
         </header>
     );
