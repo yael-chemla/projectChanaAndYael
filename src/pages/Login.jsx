@@ -26,6 +26,7 @@ function Login() {
 
     try {
       const users = await getUsers();
+
       const user = users.find(
         u => u.username === form.username && u.website === form.password
       );
@@ -37,8 +38,8 @@ function Login() {
 
       localStorage.setItem("currentUser", JSON.stringify(user));
       setCurrentUser(user);
-      console.log("fdsfvfdb")
       navigate(`/home/users/${user.id}`);
+
 
     } catch (err) {
       setError("שגיאה בהתחברות לשרת");

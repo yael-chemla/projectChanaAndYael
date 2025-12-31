@@ -8,6 +8,7 @@ import Todos from "../src/components/Todos"
 import Albums from "../src/components/Albums"
 import Info from "../src/components/Info"
 import Posts from "../src/components/Posts"
+import ProtectedRoute from "./ProtectedRoute"
 
 import './App.css'
 function App() {
@@ -22,7 +23,10 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/register-details" element={<RegisterDetails />} />
 
-            <Route path="/home/users/:id" element={<Home />}>
+            <Route path="/home/users/:id" element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>}>
               <Route path="todos" element={<Todos />} />
               <Route path="albums" element={<Albums />} />
               <Route path="info" element={<Info />} />

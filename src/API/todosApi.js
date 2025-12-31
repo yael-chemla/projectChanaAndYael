@@ -48,7 +48,7 @@ export const updateTodoTitle = async (id, newTitle) => {
   }
 };
 
-// עדכון מצב TODO (completed)
+// עדכון מצב TODO 
 export const toggleTodoCompleted = async (id, completed) => {
   try {
     const response = await fetch(`${BASE_URL}/${id}`, {

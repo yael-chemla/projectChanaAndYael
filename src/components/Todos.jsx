@@ -1,12 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { MyContext } from "../context";
-import {
-  getTodosByUser,
-  addTodo,
-  deleteTodo,
-  updateTodoTitle,
-  toggleTodoCompleted
-} from "../API/todosApi";
+import { getTodosByUser,addTodo,deleteTodo,updateTodoTitle,toggleTodoCompleted } from "../API/todosApi";
 import "../css/todos.css";
 
 function Todos() {
