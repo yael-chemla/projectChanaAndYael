@@ -1,37 +1,19 @@
+import { getByUser ,addItem,deleteItem} from "../API/generalApi";
+
 const BASE_URL = "http://localhost:3000/todos";
 
 export const getTodosByUser = async (userId) => {
-  try {
-    const response = await fetch(`${BASE_URL}?userId=${userId}`);
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Error fetching todos:", error);
-    return [];
-  }
+  return getByUser(userId,"todos");
 };
 
 // הוספת TODO חדש
 export const addTodo = async (todo) => {
-  try {
-    const response = await fetch(BASE_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(todo),
-    });
-    return await response.json();
-  } catch (error) {
-    console.error("Error adding todo:", error);
-  }
+  return addItem(todo,"todos");
 };
 
 // מחיקת TODO
 export const deleteTodo = async (id) => {
-  try {
-    await fetch(`${BASE_URL}/${id}`, { method: "DELETE" });
-  } catch (error) {
-    console.error("Error deleting todo:", error);
-  }
+  return deleteItem(id,"todos")
 };
 
 // עדכון תוכן TODO
@@ -61,3 +43,4 @@ export const toggleTodoCompleted = async (id, completed) => {
     console.error("Error toggling todo:", error);
   }
 };
+6

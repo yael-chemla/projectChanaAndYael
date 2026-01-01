@@ -1,74 +1,193 @@
-.todos-container {
-  padding: 20px;
+/* ===== RESET כללי ===== */
+* {
+  box-sizing: border-box;
 }
 
-.add-todo {
-  margin-bottom: 20px;
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background-color: #f7f9fc;
+  color: #111;
+}
+
+/* ===== מבנה עמוד ===== */
+.todos-page {
   display: flex;
-  gap: 10px;
+  flex-direction: row-reverse; /* סרגל משמאל */
+  min-height: 100vh;
 }
 
-.add-todo input {
-  flex: 1;
-  padding: 6px 10px;
-  font-size: 14px;
+/* ===== סרגל צד ===== */
+.todos-sidebar {
+  width: 30%;
+  min-width: 280px;
+  background-color: #ffffff;
+  border-right: 1px solid #e0e6ed;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
 }
 
-.add-todo button {
-  padding: 6px 12px;
-  cursor: pointer;
-  width: 200px;
+/* כותרות */
+.todos-sidebar h2 {
+  margin: 0;
+  font-size: 20px;
+  color: #0a2540;
 }
 
+/* קופסאות בסרגל (Search / Select / AddTodo) */
+.todos-sidebar > div {
+  background-color: #f9fbff;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid #e1e8f0;
+}
+
+/* ===== תוכן ראשי ===== */
+.todos-content {
+  width: 70%;
+  padding: 30px;
+}
+
+/* ===== GRID של משימות ===== */
 .todos-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 עמודות שוות */
-  gap: 15px; /* רווח בין הכרטיסים */
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 20px;
 }
+
+/* ===== כרטיס משימה ===== */
 .todo-card {
-  background-color: #f0f0f0;
-  border-radius: 6px;
-  padding: 10px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 14px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 140px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  min-height: 150px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
 }
 
+/* ID */
 .todo-id {
   font-size: 12px;
-  color: #555;
-  margin-bottom: 6px;
+  color: #6b7280;
 }
 
+/* כותרת */
 .todo-title {
+  font-size: 15px;
   font-weight: 500;
-  margin-bottom: 6px;
+  margin: 8px 0;
 }
 
+/* פעולות */
 .todo-actions {
   display: flex;
-  gap: 5px;
+  gap: 6px;
   margin-top: 10px;
 }
 
 .todo-actions button {
   flex: 1;
-  padding: 4px 6px;
   font-size: 12px;
-  border: none;
-  border-radius: 4px;
-  background-color: #007bff;
-  color: white;
+  padding: 6px;
+}
+
+/* ===== כפתורים כלליים ===== */
+button {
+  background-color: #e6f1ff;
+  color: #0a2540;
+  border: 1px solid #c9defa;
+  border-radius: 8px;
+  padding: 8px 12px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.2s ease;
+  font-weight: 500;
 }
 
-.todo-actions button:hover {
-  background-color: #0056b3;
+button:hover {
+  background-color: #cfe4ff;
 }
 
-#addTodo{
-    width: 10px;
+/* ===== inputs & select ===== */
+input,
+select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #cfd8e3;
+  font-size: 14px;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #6aa9ff;
+}
+
+/* ===== Add Todo ===== */
+.add-todo {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.add-todo input {
+  height: 70px;           /* עבה */
+  padding: 12px 14px;
+  font-size: 15px;
+}
+
+.add-todo button {
+  height: 44px;
+}
+
+/* placeholder */
+.add-todo input::placeholder {
+  color: #000;
+  opacity: 1;
+}
+
+/* ===== Search ===== */
+.todos-sidebar button {
+  margin-top: 6px;
+}
+
+/* ===== רספונסיביות ===== */
+@media (max-width: 900px) {
+  .todos-page {
+    flex-direction: column;
+  }
+
+  .todos-sidebar,
+  .todos-content {
+    width: 100%;
+  }
+
+  .todos-sidebar {
+    border-right: none;
+    border-bottom: 1px solid #e0e6ed;
+   
+  }
+}
+.todos-page {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* תוכן */
+.todos-content {
+  flex: 1;
+  padding: 30px;
+}
+
+/* סרגל */
+.todos-sidebar {
+  width: 30%;
+  min-width: 280px;
+  padding: 24px;
+  background-color: #fff;
+  border-left: 1px solid #e0e6ed;
 }
