@@ -2,8 +2,9 @@ import { useState, useContext } from "react";
 import { MyContext } from "../../context";
 
 function Comment({ comment, onUpdate, onDelete }) {
-    const { currentUser } = useContext(MyContext); 
+    const { currentUser } = useContext(MyContext);
     const [newBody, setNewBody] = useState(comment.body);
+    const [isEditing, setIsEditing] = useState(false);
 
     const handleSave = () => {
         onUpdate(comment.id, { body: newBody });

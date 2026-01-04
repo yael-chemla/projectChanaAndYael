@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { MyContext } from "../../context";
-import { addComment } from "../../API/commentApi"; PI
+import { addComment } from "../../API/commentApi";
 
 function AddComment({ postId, onAdd }) {
   const { currentUser } = useContext(MyContext);
