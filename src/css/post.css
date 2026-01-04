@@ -1,0 +1,64 @@
+.post-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 15px;
+  width: 260px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.post-id {
+  font-size: 12px;
+  color: #888;
+}
+
+.post-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.post-body {
+  font-size: 14px;
+  color: #444;
+  line-height: 1.4;
+}
+
+.post-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+.post-actions button {
+  padding: 5px 10px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+.posts-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+.post-card.selected {
+  border: 2px solid black;
+  background: #f5f5f5;
+}
+.post-card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  background: #f9f9f9;
+}
+
+.full-post {
+  margin-top: 10px;
+  padding: 5px;
+  border-top: 1px solid #ddd;
+}

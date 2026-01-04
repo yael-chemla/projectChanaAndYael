@@ -1,5 +1,7 @@
 const BASE_URL = "http://localhost:3000";
 
+
+
 export const getByUser = async (userId,type) => {
   try {
     const response = await fetch(`${BASE_URL}/${type}?userId=${userId}`);

@@ -24,31 +24,54 @@ function Todos() {
 
     const handleToggleCompleted = async (todo) => {
         const updated = await toggleTodoCompleted(todo.id, !todo.completed);
-        setFilteredTodos(todos.map(t => t.id === todo.id ? updated : t));
+
+        const newTodos = todos.map(t =>
+            t.id === todo.id ? updated : t
+        );
+
+        setTodos(newTodos);
+        setFilteredTodos(newTodos);
     };
+
 
     const handleDelete = async (id) => {
         await deleteTodo(id);
-        setFilteredTodos(todos.filter(t => t.id !== id));
+
+        const newTodos = todos.filter(t => t.id !== id);
+        setTodos(newTodos);
+        setFilteredTodos(newTodos);
     };
+
 
     const handleUpdateTitle = async (todo) => {
         const newText = prompt("Enter new title:", todo.title);
-        if (newText) {
-            const updated = await updateTodoTitle(todo.id, newText);
-            setFilteredTodos(todos.map(t => t.id === todo.id ? updated : t));
-        }
+        if (!newText) return;
+
+        const updated = await updateTodoTitle(todo.id, newText);
+
+        const newTodos = todos.map(t =>
+            t.id === todo.id ? updated : t
+        );
+
+        setTodos(newTodos);
+        setFilteredTodos(newTodos);
     };
+
 
     const handleAddTodo = async () => {
         if (!newTitle) return;
+
         const newTodo = {
             title: newTitle,
             userId: currentUser.id,
             completed: false
         };
+
         const added = await addTodo(newTodo);
-        setFilteredTodos([...todos, added]);
+        const newTodos = [...todos, added];
+
+        setTodos(newTodos);
+        setFilteredTodos(newTodos); // חשוב!
         setNewTitle("");
     };
 
