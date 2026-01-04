@@ -71,7 +71,7 @@ function Todos() {
         const newTodos = [...todos, added];
 
         setTodos(newTodos);
-        setFilteredTodos(newTodos); // חשוב!
+        setFilteredTodos(newTodos); 
         setNewTitle("");
     };
 
@@ -92,7 +92,6 @@ function Todos() {
 
             </div>
 
-            {/* תוכן שמאל */}
             <main className="todos-content">
                 <div className="todos-grid">
                     {filteredTodos.map(todo => (

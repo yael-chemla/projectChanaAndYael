@@ -3,7 +3,6 @@ import { useState } from "react";
 function Search({ todos, onFilter }) {
   const [query, setQuery] = useState("");
 
-  /* ===== חלק 1: סינון לפי מצב ביצוע ===== */
 
   const showCompleted = () => {
     const filtered = todos.filter(t => t.completed === true);
@@ -19,7 +18,6 @@ function Search({ todos, onFilter }) {
     onFilter(todos);
   };
 
-  /* ===== חלק 2: חיפוש לפי ID / TITLE ===== */
 
   const searchById = () => {
     const q = query.trim();

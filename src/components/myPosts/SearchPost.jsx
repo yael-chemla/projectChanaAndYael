@@ -8,7 +8,6 @@ function SearchPost({ posts, onFilter }) {
     onFilter(posts);
   };
 
-  /* ===== חלק 2: חיפוש לפי ID / TITLE ===== */
 
   const searchById = () => {
     const q = query.trim();

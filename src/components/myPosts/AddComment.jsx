@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { MyContext } from "../../context";
-import { addComment } from "../../API/commentApi"; // הקפדה להשתמש ב-API
+import { addComment } from "../../API/commentApi"; PI
 
 function AddComment({ postId, onAdd }) {
   const { currentUser } = useContext(MyContext);
@@ -9,17 +9,16 @@ function AddComment({ postId, onAdd }) {
   const handleSubmit = async () => {
     if (!body.trim()) return;
 
-    // שולחים לשרת רק מה שהשרת צריך
     const newComment = {
       postId,
       email: currentUser.email,
       body
     };
 
-    const savedComment = await addComment(newComment); // שולחים לשרת ומקבלים את האובייקט עם id
+    const savedComment = await addComment(newComment); 
 
     if (savedComment) {
-      onAdd(savedComment); // מכניסים ל-state את התגובה המלאה שהשרת החזיר
+      onAdd(savedComment); 
       setBody("");
     }
   };

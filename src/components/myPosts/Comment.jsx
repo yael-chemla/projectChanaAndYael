@@ -2,8 +2,7 @@ import { useState, useContext } from "react";
 import { MyContext } from "../../context";
 
 function Comment({ comment, onUpdate, onDelete }) {
-    const { currentUser } = useContext(MyContext); // שולף את המשתמש הנוכחי מהקונטקסט
-    const [isEditing, setIsEditing] = useState(false);
+    const { currentUser } = useContext(MyContext); 
     const [newBody, setNewBody] = useState(comment.body);
 
     const handleSave = () => {
@@ -11,7 +10,6 @@ function Comment({ comment, onUpdate, onDelete }) {
         setIsEditing(false);
     };
 
-    // השוואת מייל כדי לדעת אם המשתמש הנוכחי הוא זה שכתב את התגובה
     const isOwner = comment.email === currentUser.email;
 
     return (
