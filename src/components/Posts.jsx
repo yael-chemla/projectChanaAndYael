@@ -58,16 +58,18 @@ function Posts() {
 
   return (
     <div className="posts-grid">
-      <AddPost
-        newTitle={newTitle}
-        setNewTitle={setNewTitle}
-        newBody={newBody}
-        setNewBody={setNewBody}
-        handleAddPost={handleAddPost}
-      />
-      <SelectPosts posts={posts} onFilter={setFilteredPosts} />
-      <br></br>
-      <SearchPost posts={posts} onFilter={setFilteredPosts} />
+      <div className="sidebar">
+        <AddPost
+          newTitle={newTitle}
+          setNewTitle={setNewTitle}
+          newBody={newBody}
+          setNewBody={setNewBody}
+          handleAddPost={handleAddPost}
+        />
+        <SelectPosts posts={posts} onFilter={setFilteredPosts} />
+        <SearchPost posts={posts} onFilter={setFilteredPosts} />
+      </div>
+
 
 
       {filteredTodos.map(post => (
