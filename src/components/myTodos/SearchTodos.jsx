@@ -18,9 +18,9 @@ function SearchTodos({ todos, onFilter }) {
       <GeneralSearch items={todos} onFilter={onFilter} />
 
       <div>
-        <button onClick={showCompleted}>בוצעו</button>
+        <button onClick={showCompleted}>completed</button>
         <button onClick={showNotCompleted} style={{ marginLeft: "5px" }}>
-          לא בוצעו
+          not completed 
         </button>
       </div>
     </>

@@ -23,11 +23,11 @@ function Select({ todos, onFilter }) {
 
   return (
     <label>
-      מיין לפי:{" "}
+       sort by:{" "}
       <select value={sortBy} onChange={handleSortChange}>
         <option value="id">ID</option>
-        <option value="title">כותרת</option>
-        <option value="completed">מצב ביצוע</option>
+        <option value="title">title</option>
+        <option value="completed">state completed </option>
       </select>
     </label>
   );

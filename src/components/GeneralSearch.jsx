@@ -30,19 +30,19 @@ function GeneralSearch({ items, onFilter }) {
       <div>
         <input
           type="text"
-          placeholder="הכנס ערך לחיפוש"
+          placeholder="enter a value for search"
           value={query}
           onChange={e => setQuery(e.target.value)}
           style={{ marginRight: "10px" }}
         />
-        <button onClick={searchById}>חפש לפי ID</button>
+        <button onClick={searchById}>search by ID </button>
         <button onClick={searchByTitle} style={{ marginLeft: "5px" }}>
-          חפש לפי כותרת
+         search by title
         </button>
 
       </div>
         <button onClick={showAll} style={{ marginLeft: "5px" }}>
-          הכל
+          all 
         </button>
       </div>
       
