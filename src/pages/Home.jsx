@@ -5,10 +5,12 @@ function Home() {
     return (
         <div>
             <Header />
-            <div style={{ padding: "20px" }}>
+            <div>
                 <Outlet />
             </div>
         </div>
     );
 }
 export default Home;
+
+

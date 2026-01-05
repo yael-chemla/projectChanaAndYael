@@ -5,7 +5,6 @@ import MyPost from "./myPosts/MyPost";
 import "../css/post.css";
 import AddPost from "./myPosts/AddPost";
 import SearchPost from "./myPosts/SearchPost"
-import SelectPosts from "./myPosts/SelectPosts";
 
 function Posts() {
   const { currentUser } = useContext(MyContext);
@@ -13,7 +12,7 @@ function Posts() {
   const [newTitle, setNewTitle] = useState("");
   const [newBody, setNewBody] = useState("");
   const [selectedPostId, setSelectedPostId] = useState(null);
-  const [filteredTodos, setFilteredPosts] = useState([]); // מה שמוצג על המסך
+  const [filteredTodos, setFilteredPosts] = useState([]);
 
 
   useEffect(() => {
@@ -52,6 +51,7 @@ function Posts() {
 
     setPosts([newPost, ...posts]);
     setFilteredPosts([newPost, ...posts]);
+
     setNewTitle("");
     setNewBody("");
   };
@@ -66,7 +66,6 @@ function Posts() {
           setNewBody={setNewBody}
           handleAddPost={handleAddPost}
         />
-        <SelectPosts posts={posts} onFilter={setFilteredPosts} />
         <SearchPost posts={posts} onFilter={setFilteredPosts} />
       </div>
 

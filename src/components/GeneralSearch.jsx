@@ -1,21 +1,13 @@
 import { useState } from "react";
 
-function Search({ todos, onFilter }) {
+function GeneralSearch({ items, onFilter }) {
   const [query, setQuery] = useState("");
 
 
-  const showCompleted = () => {
-    const filtered = todos.filter(t => t.completed === true);
-    onFilter(filtered);
-  };
-
-  const showNotCompleted = () => {
-    const filtered = todos.filter(t => t.completed === false);
-    onFilter(filtered);
-  };
+  
 
   const showAll = () => {
-    onFilter(todos);
+    onFilter(items);
   };
 
 
@@ -23,7 +15,7 @@ function Search({ todos, onFilter }) {
     const q = query.trim();
     if (!q) return;
 
-    const filtered = todos.filter(t => t.id.toString() === q);
+    const filtered = items.filter(t => t.id.toString() === q);
     onFilter(filtered);
   };
 
@@ -31,7 +23,7 @@ function Search({ todos, onFilter }) {
     const q = query.trim().toLowerCase();
     if (!q) return;
 
-    const filtered = todos.filter(t =>
+    const filtered = items.filter(t =>
       t.title.toLowerCase().includes(q)
     );
     onFilter(filtered);
@@ -53,20 +45,14 @@ function Search({ todos, onFilter }) {
         </button>
 
       </div>
-      <br></br>
-      <div style={{ marginBottom: "10px" }}>
-        <button onClick={showCompleted}>בוצעו</button>
-        <button onClick={showNotCompleted} style={{ marginLeft: "5px" }}>
-          לא בוצעו
-        </button>
         <button onClick={showAll} style={{ marginLeft: "5px" }}>
           הכל
         </button>
       </div>
 
       
-    </div>
+    
   );
 }
 
-export default Search;
+export default GeneralSearch;

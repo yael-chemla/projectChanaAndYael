@@ -1,10 +1,10 @@
 /* ---------- סרגל צד ימין ---------- */
 .sidebar {
   position: fixed;
-  top: 0;
+  top: 60px;                     /* יורד מתחת להדר */
   right: 0;
   width: 300px;
-  height: 100vh;
+  height: calc(100vh - 60px);    /* שלא יגלוש למטה */
   background: #f0f0f0;
   padding: 20px;
   box-shadow: -2px 0 6px rgba(0,0,0,0.1);
@@ -14,6 +14,7 @@
   overflow-y: auto;
   z-index: 10;
 }
+
 
 /* ---------- סידור הפוסטים בצד שמאל ---------- */
 .posts-grid {

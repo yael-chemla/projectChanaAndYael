@@ -6,7 +6,7 @@ export const getByUser = async (userId,type) => {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error("Error fetching todos:", error);
+    console.error("Error fetching :", error);
     return [];
   }
 };
@@ -21,6 +21,7 @@ export const addItem = async (item, type) => {
       },
       body: JSON.stringify(item),
     });
+    if (!response.ok) throw new Error("שגיאה  ");
 
     return await response.json();
   } catch (error) {
@@ -44,5 +45,19 @@ export const deleteItem = async (id, type) => {
   } catch (error) {
     console.error("Error deleting item:", error);
     return false;
+  }
+};
+//עדכון
+export const updateItem = async (id, updatedFields,type) => {
+  try {
+    const response = await fetch(`${BASE_URL}/${type}/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updatedFields),
+    });
+    return await response.json();
+  } catch (error) {
+    console.error("Error updating comment:", error);
+    return null;
   }
 };

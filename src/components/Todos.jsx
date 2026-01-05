@@ -5,13 +5,13 @@ import "../css/todos.css";
 import MyTodo from "../components/myTodos/MyTodo";
 import AddTodo from "../components/myTodos/AddTodo";
 import Select from "../components/myTodos/Select";
-import Search from "../components/myTodos/Search";
+import Search from "./myTodos/SearchTodos";
 
 
 function Todos() {
     const { currentUser } = useContext(MyContext);
     const [todos, setTodos] = useState([]);
-    const [filteredTodos, setFilteredTodos] = useState([]); // מה שמוצג על המסך
+    const [filteredTodos, setFilteredTodos] = useState([]); 
     const [newTitle, setNewTitle] = useState("");
 
     useEffect(() => {

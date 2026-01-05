@@ -71,7 +71,7 @@ body {
 }
 
 .error {
-  color: red;
+  color: rgb(180, 15, 15);
   text-align: center;
   margin-top: 10px;
 }

@@ -85,8 +85,8 @@ function MyPost({ post, isSelected, onSelect, canEdit, handleDelete, handleUpdat
                   comment={comment}
                   onUpdate={handleCommentUpdate}
                   onDelete={handleCommentDelete}
-                  setIsEditing={setIsEditing}
-                  isEditing={isEditing}
+                  // setIsEditing={setIsEditing}
+                  // isEditing={isEditing}
                 />
               ))}
             </>

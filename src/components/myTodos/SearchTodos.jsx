@@ -1,0 +1,30 @@
+import { useState } from "react";
+import GeneralSearch from "../GeneralSearch";
+
+function SearchTodos({ todos, onFilter }) {
+
+  const showCompleted = () => {
+    const filtered = todos.filter(t => t.completed === true);
+    onFilter(filtered);
+  };
+
+  const showNotCompleted = () => {
+    const filtered = todos.filter(t => t.completed === false);
+    onFilter(filtered);
+  };
+  
+  return (
+    <>
+      <GeneralSearch items={todos} onFilter={onFilter} />
+
+      <div>
+        <button onClick={showCompleted}>בוצעו</button>
+        <button onClick={showNotCompleted} style={{ marginLeft: "5px" }}>
+          לא בוצעו
+        </button>
+      </div>
+    </>
+  );
+}
+
+export default SearchTodos;

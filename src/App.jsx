@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import {  Routes, Route } from 'react-router-dom'
 import { MyProvider } from "./context";
 import Login from "../src/pages/Login"
 import Register from "../src/pages/Register"
@@ -16,7 +16,6 @@ function App() {
   return (
     <>
       <MyProvider>
-        <BrowserRouter>
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/login" element={<Login />} />
@@ -33,7 +32,6 @@ function App() {
               <Route path="posts" element={<Posts />} />
             </Route>
           </Routes>
-        </BrowserRouter>
       </MyProvider >
 
     </>

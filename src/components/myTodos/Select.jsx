@@ -16,6 +16,7 @@ function Select({ todos, onFilter }) {
       }
       return a.id - b.id;
     });
+    
 
     onFilter(sortedTodos); 
   };
