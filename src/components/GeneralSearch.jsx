@@ -3,13 +3,9 @@ import { useState } from "react";
 function GeneralSearch({ items, onFilter }) {
   const [query, setQuery] = useState("");
 
-
-  
-
   const showAll = () => {
     onFilter(items);
   };
-
 
   const searchById = () => {
     const q = query.trim();
@@ -49,9 +45,7 @@ function GeneralSearch({ items, onFilter }) {
           הכל
         </button>
       </div>
-
       
-    
   );
 }
 

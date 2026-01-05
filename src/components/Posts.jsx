@@ -57,7 +57,7 @@ function Posts() {
   };
 
   return (
-    <div className="posts-grid">
+    <div className="posts-page">
       <div className="sidebar">
         <AddPost
           newTitle={newTitle}
@@ -70,18 +70,19 @@ function Posts() {
       </div>
 
 
-
-      {filteredTodos.map(post => (
-        <MyPost
-          key={post.id}
-          post={post}
-          isSelected={post.id === selectedPostId}
-          onSelect={() => setSelectedPostId(post.id)}
-          canEdit={Number(post.userId) === Number(currentUser.id)}
-          handleDelete={handleDelete}
-          handleUpdate={handleUpdate}
-        />
-      ))}
+      <div className="posts-content">
+        {filteredTodos.map(post => (
+          <MyPost
+            key={post.id}
+            post={post}
+            isSelected={post.id === selectedPostId}
+            onSelect={() => setSelectedPostId(post.id)}
+            canEdit={Number(post.userId) === Number(currentUser.id)}
+            handleDelete={handleDelete}
+            handleUpdate={handleUpdate}
+          />
+        ))}
+      </div>
 
     </div>
   );

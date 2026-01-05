@@ -1,17 +1,24 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getUsers } from "../API/usersApi";
 import { MyContext } from "../context";
 import "../css/login.css";
 
 function Login() {
-  const { setCurrentUser } = useContext(MyContext);
+  const { currentUser, setCurrentUser } = useContext(MyContext);
+
+
   const [form, setForm] = useState({
     username: "",
     password: ""
   });
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  useEffect(() => {
+    if (currentUser) {
+      navigate(`/home/users/${currentUser.id}`);
+    }
+  }, [currentUser, navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -36,9 +43,21 @@ function Login() {
         return;
       }
 
-      localStorage.setItem("currentUser", JSON.stringify(user));
-      setCurrentUser(user);
-      navigate(`/home/users/${user.id}`);
+      // localStorage.setItem("currentUser", JSON.stringify(user));
+      // setCurrentUser(user);
+      // navigate(`/home/users/${user.id}`);
+
+      const DetailsUser = {
+        id: user.id,
+        name: user.name,
+        email: user.email
+      };
+
+      localStorage.setItem("currentUser", JSON.stringify(DetailsUser));
+      setCurrentUser(DetailsUser);
+
+      navigate(`/home/users/${DetailsUser.id}`);
+
 
 
     } catch (err) {

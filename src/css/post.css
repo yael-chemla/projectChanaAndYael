@@ -1,10 +1,10 @@
 /* ---------- סרגל צד ימין ---------- */
 .sidebar {
   position: fixed;
-  top: 60px;                     /* יורד מתחת להדר */
+  top: 60px;
   right: 0;
   width: 300px;
-  height: calc(100vh - 60px);    /* שלא יגלוש למטה */
+  height: calc(100vh - 60px);
   background: #f0f0f0;
   padding: 20px;
   box-shadow: -2px 0 6px rgba(0,0,0,0.1);
@@ -15,65 +15,115 @@
   z-index: 10;
 }
 
-
-/* ---------- סידור הפוסטים בצד שמאל ---------- */
-.posts-grid {
+/* ---------- אזור הפוסטים ---------- */
+.posts-content {
   margin-right: 320px; /* שוליים כדי לא להיתקל בסרגל */
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
 }
 
 /* ---------- כרטיס פוסט ---------- */
 .post-card {
+  width: 100%; /* תופס כמעט כל הרוחב */
+  max-width: calc(100% - 20px);
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 12px;
-  padding: 15px;
-  width: 260px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+/* ---------- כותרת הפוסט ---------- */
+.post-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 10px;
+}
+
+/* ---------- כפתור SELECT / HIDE ---------- */
+.post-header button {
+  display: block;
+  width: 120px;
+  padding: 8px;
+  border-radius: 8px;
+  border: none;
+  background: #007bff;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 5px;
+  text-align: center;
+  transition: 0.2s;
+}
+
+.post-header button:hover {
+  background: #0056b3;
+}
+
+/* כפתור Hide Post קטן יותר */
+.post-card.expanded .post-header button {
+  width: 100px;
+  font-size: 12px;
+  background: #555;
+}
+
+/* ---------- גוף הפוסט ---------- */
+.post-body {
+  margin-top: 10px;
+  line-height: 1.6;
+  font-size: 15px;
+  color: #333;
+  padding: 10px;
+  border-top: 1px solid #eee;
+  border-radius: 6px;
+  background: #fafafa;
+}
+
+/* ---------- תגובות מתחת לפוסט ---------- */
+.comments-list {
+  margin-top: 15px;
+  padding-left: 20px;
+  border-left: 3px solid #eee;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
 }
 
-.post-card.selected {
-  border: 2px solid #000;
-  background: #f5f5f5;
-}
-
-/* ---------- תגובות ---------- */
+/* ---------- תגובות בודדות ---------- */
 .comment {
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 8px;
-  margin-top: 8px;
   background: #fafafa;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
   position: relative;
+  text-align: left;
 }
 
-/* ---------- מסגרת כפתורי עריכה ומחיקה בתחתית ---------- */
+/* ---------- כפתורי EDIT / DELETE ---------- */
 .comment-actions {
   display: flex;
-  gap: 8px;
-  border-top: 1px solid #ddd;
-  padding-top: 5px;
-  margin-top: 5px;
+  gap: 5px;
+  border-top: none;
   justify-content: flex-end;
 }
 
-/* כפתורי אייקון */
 .comment-actions button {
   border: 1px solid #ccc;
   border-radius: 6px;
   background: #fff;
   cursor: pointer;
-  padding: 3px 6px;
-  font-size: 14px;
+  padding: 2px 5px;
+  font-size: 12px;
 }
 
 .comment-actions button:hover {
@@ -88,8 +138,25 @@
   content: "🗑️";
 }
 
+/* ---------- כפתור SHOW COMMENTS ---------- */
+.post-body > button {
+  display: block;
+  width: 140px;
+  margin: 10px auto 0 auto;
+  padding: 6px;
+  border-radius: 6px;
+  font-size: 13px;
+  background: #0056b3;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
 
-/* ---------- כפתורים וסגנון סרגל ---------- */
+.post-body > button:hover {
+  background: #0056b3;
+}
+
+/* ---------- כפתורים וסרגלי קלט ---------- */
 .add-post input,
 .add-post textarea,
 .add-comment-form textarea,
@@ -123,7 +190,7 @@
   background: #0056b3;
 }
 
-/* ---------- סידור פנימי של תגובות ---------- */
+/* ---------- סידור פנימי של תגובות וגוף הפוסט ---------- */
 .full-post {
   margin-top: 10px;
   padding-top: 10px;

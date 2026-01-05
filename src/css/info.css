@@ -1,14 +1,4 @@
-/* info.css */
-.info-button {
-  padding: 5px 10px;
-  cursor: pointer;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 4px;
-}
-
-.modal-overlay {
+.info-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -21,25 +11,51 @@
   z-index: 1000;
 }
 
-.modal-content {
+.info-panel {
   background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  min-width: 300px;
+  padding: 30px 20px 20px 20px; /* שימי קצת יותר padding למעלה כדי לא להסתיר עם הכפתור */
+  border-radius: 15px;
+  width: 500px;
   max-width: 90%;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  max-height: 90%;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
 }
 
-.modal-content h2 {
-  margin-top: 0;
-}
-
-.modal-content button {
-  margin-top: 10px;
-  padding: 5px 10px;
-  cursor: pointer;
-  border-radius: 4px;
+/* כפתור X מעל כל התוכן בפינה שמאלית עליונה */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  left: 10px;
   border: none;
-  background-color: #360dcb;
-  color: white;
+  background: transparent;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10; /* לוודא שהוא מעל כל התוכן */
+}
+
+.info-section {
+  margin-top: 40px; /* רווח כדי שהכפתור לא יכסה את הכותרת */
+  margin-bottom: 20px;
+}
+
+.info-section h4 {
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+}
+
+.user-info p {
+  margin: 5px 0;
+}
+
+.user-info a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.user-info a:hover {
+  text-decoration: underline;
 }

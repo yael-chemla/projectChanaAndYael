@@ -13,20 +13,26 @@ body {
 /* ===== מבנה עמוד ===== */
 .todos-page {
   display: flex;
-  flex-direction: row-reverse; /* סרגל משמאל */
+  flex-direction: row-reverse; /* סרגל מצד ימין */
   min-height: 100vh;
 }
 
 /* ===== סרגל צד ===== */
 .todos-sidebar {
-  width: 30%;
-  min-width: 280px;
-  background-color: #ffffff;
-  border-right: 1px solid #e0e6ed;
-  padding: 24px;
+  position: fixed;
+  top: 60px;                     /* אם יש header */
+  right: 0;
+  width: 300px;
+  height: calc(100vh - 60px);
+  background: #f0f0f0;
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 15px;
+  overflow-y: auto;
+  box-shadow: -2px 0 6px rgba(0,0,0,0.1);
+  z-index: 10;
+  border-left: 1px solid #e0e6ed;
 }
 
 /* כותרות */
@@ -36,9 +42,9 @@ body {
   color: #0a2540;
 }
 
-/* קופסאות בסרגל (Search / Select / AddTodo) */
+/* קופסאות בתוך הסרגל */
 .todos-sidebar > div {
-  background-color: #f9fbff;
+  background-color: #fff;
   padding: 16px;
   border-radius: 12px;
   border: 1px solid #e1e8f0;
@@ -46,27 +52,28 @@ body {
 
 /* ===== תוכן ראשי ===== */
 .todos-content {
-  width: 70%;
+  flex: 1;
+  margin-right: 320px; /* שוליים כדי לא להיתקל בסרגל */
   padding: 30px;
 }
 
-/* ===== GRID של משימות ===== */
+/* ===== GRID של משימות - 2 עמודות ===== */
 .todos-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
 }
 
 /* ===== כרטיס משימה ===== */
 .todo-card {
   background-color: #ffffff;
-  border-radius: 10px;
-  padding: 14px;
+  border-radius: 12px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  min-height: 150px;
+  gap: 10px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  min-height: 150px;
 }
 
 /* ID */
@@ -77,22 +84,31 @@ body {
 
 /* כותרת */
 .todo-title {
-  font-size: 15px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 600;
   margin: 8px 0;
+  color: #0a2540;
 }
 
-/* פעולות */
+/* ===== פעולות ===== */
 .todo-actions {
   display: flex;
-  gap: 6px;
-  margin-top: 10px;
+  justify-content: center; /* כפתורים במרכז */
+  gap: 8px;
 }
 
 .todo-actions button {
-  flex: 1;
   font-size: 12px;
-  padding: 6px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid #c9defa;
+  background-color: #e6f1ff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.todo-actions button:hover {
+  background-color: #cfe4ff;
 }
 
 /* ===== כפתורים כלליים ===== */
@@ -135,7 +151,7 @@ select:focus {
 }
 
 .add-todo input {
-  height: 70px;           /* עבה */
+  height: 60px;
   padding: 12px 14px;
   font-size: 15px;
 }
@@ -155,6 +171,51 @@ select:focus {
   margin-top: 6px;
 }
 
+/* ===== כרטיס תגובות ===== */
+.comment {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 8px;
+  margin-top: 8px;
+  background: #fafafa;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+}
+
+/* כפתורי העריכה והמחיקה */
+.comment-actions,
+.post-body .post-actions {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.comment-actions button,
+.post-body .post-actions button {
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #fff;
+  cursor: pointer;
+}
+
+.comment-actions button:hover,
+.post-body .post-actions button:hover {
+  background: #f0f0f0;
+}
+
+/* כפתור תגובות קטן ומרכזי */
+.show-comments-btn {
+  display: block;
+  margin: 10px auto;
+  padding: 4px 10px;
+  font-size: 12px;
+}
+
 /* ===== רספונסיביות ===== */
 @media (max-width: 900px) {
   .todos-page {
@@ -167,27 +228,12 @@ select:focus {
   }
 
   .todos-sidebar {
-    border-right: none;
+    border-left: none;
     border-bottom: 1px solid #e0e6ed;
-   
   }
-}
-.todos-page {
-  display: flex;
-  min-height: 100vh;
-}
 
-/* תוכן */
-.todos-content {
-  flex: 1;
-  padding: 30px;
-}
-
-/* סרגל */
-.todos-sidebar {
-  width: 30%;
-  min-width: 280px;
-  padding: 24px;
-  background-color: #fff;
-  border-left: 1px solid #e0e6ed;
+  /* בקבוצות קטנות יותר יש עמודה אחת */
+  .todos-grid {
+    grid-template-columns: 1fr;
+  }
 }

@@ -39,20 +39,28 @@ function MyPost({ post, isSelected, onSelect, canEdit, handleDelete, handleUpdat
   };
 
   return (
-    <div className="post-card">
+    <div className={`post-card ${showFullPost ? "expanded" : ""}`}>
       {/* רק כותרת ו-ID */}
-      <div>
+      {/* <div>
         <strong>ID:</strong> {post.id} 
               <br></br>
 
         <strong>Title:</strong> {post.title}
+      </div> */}
+      <div className="post-header">
+        <div className="post-title">
+          <strong>ID:</strong> {post.id}
+          <br></br>
+          <strong>Title:</strong> {post.title}
+        </div>
+
+        <button onClick={() => setShowFullPost(!showFullPost)}>
+          {showFullPost ? "Hide Post" : "Select"}
+        </button>
       </div>
-      <button onClick={() => setShowFullPost(!showFullPost)}>
-        {showFullPost ? "Hide Post" : "Select"}
-      </button>
 
       {showFullPost && (
-        <div className="full-post">
+        <div className="post-body">
           {isEditing ? (
             <>
               <textarea value={newBody} onChange={(e) => setNewBody(e.target.value)} />
@@ -77,19 +85,17 @@ function MyPost({ post, isSelected, onSelect, canEdit, handleDelete, handleUpdat
           </button>
 
           {showComments && (
-            <>
-              <AddComment postId={post.id} onAdd={handleCommentAdd} />
-              {comments.map(comment => (
-                <Comment
-                  key={comment.id}
-                  comment={comment}
-                  onUpdate={handleCommentUpdate}
-                  onDelete={handleCommentDelete}
-                  // setIsEditing={setIsEditing}
-                  // isEditing={isEditing}
-                />
-              ))}
-            </>
+              <div className="comments-list">
+                <AddComment postId={post.id} onAdd={handleCommentAdd} />
+                {comments.map(comment => (
+                  <Comment
+                    key={comment.id}
+                    comment={comment}
+                    onUpdate={handleCommentUpdate}
+                    onDelete={handleCommentDelete}
+                  />
+                ))}
+              </div> 
           )}
         </div>
       )}

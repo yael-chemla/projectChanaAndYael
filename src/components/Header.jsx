@@ -1,11 +1,13 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MyContext } from "../context";
 import "../css/header.css";
+import Info from "../components/Info"
 
 function Header() {
     const navigate = useNavigate();
     const { currentUser, setCurrentUser } = useContext(MyContext);
+    const [showInfo, setShowInfo] = useState(false); // state לפתיחת ה-info
 
     if (!currentUser) return null;
 
@@ -27,9 +29,13 @@ function Header() {
             <div className="menu">
                 <button onClick={() => goTo(`/home/users/${currentUser.id}/todos`)}>Todos</button>
                 <button onClick={() => goTo(`/home/users/${currentUser.id}/albums`)}>Albums</button>
-                <button onClick={() => goTo(`/home/users/${currentUser.id}/info`)}>Info</button>
+                <button onClick={() => setShowInfo(true)}>Info</button> {/* כאן פתיחת modal */}
                 <button onClick={() => goTo(`/home/users/${currentUser.id}/posts`)}>Posts</button>
             </div>
+            <Info
+                isVisible={showInfo}
+                onClose={() => setShowInfo(false)}
+            />
         </header>
     );
 }

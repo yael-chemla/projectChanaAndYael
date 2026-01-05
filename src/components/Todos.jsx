@@ -11,7 +11,7 @@ import Search from "./myTodos/SearchTodos";
 function Todos() {
     const { currentUser } = useContext(MyContext);
     const [todos, setTodos] = useState([]);
-    const [filteredTodos, setFilteredTodos] = useState([]); 
+    const [filteredTodos, setFilteredTodos] = useState([]);
     const [newTitle, setNewTitle] = useState("");
 
     useEffect(() => {
@@ -22,16 +22,29 @@ function Todos() {
         });
     }, [currentUser]);
 
-    const handleToggleCompleted = async (todo) => {
-        const updated = await toggleTodoCompleted(todo.id, !todo.completed);
+    // const handleToggleCompleted = async (todo) => {
+    //     const updated = await toggleTodoCompleted(todo.id, !todo.completed);
+
+    //     const newTodos = todos.map(t =>
+    //         t.id === todo.id ? updated : t
+    //     );
+
+    //     setTodos(newTodos);
+    //     setFilteredTodos(newTodos);
+    // };
+    const handleToggleCompleted = async (id) => {
+        const todo = todos.find(t => t.id === id);
+
+        const updated = await toggleTodoCompleted(id, !todo.completed);
 
         const newTodos = todos.map(t =>
-            t.id === todo.id ? updated : t
+            t.id === id ? updated : t
         );
 
         setTodos(newTodos);
         setFilteredTodos(newTodos);
     };
+
 
 
     const handleDelete = async (id) => {
@@ -43,14 +56,27 @@ function Todos() {
     };
 
 
-    const handleUpdateTitle = async (todo) => {
-        const newText = prompt("Enter new title:", todo.title);
-        if (!newText) return;
+    // const handleUpdateTitle = async (todo) => {
+    //     const newText = prompt("Enter new title:", todo.title);
+    //     if (!newText) return;
 
-        const updated = await updateTodoTitle(todo.id, newText);
+    //     const updated = await updateTodoTitle(todo.id, newText);
+
+    //     const newTodos = todos.map(t =>
+    //         t.id === todo.id ? updated : t
+    //     );
+
+    //     setTodos(newTodos);
+    //     setFilteredTodos(newTodos);
+    // };
+
+    const handleUpdateTitle = async (id, newTitle) => {
+        if (!newTitle) return;
+
+        const updated = await updateTodoTitle(id, newTitle);
 
         const newTodos = todos.map(t =>
-            t.id === todo.id ? updated : t
+            t.id === id ? updated : t
         );
 
         setTodos(newTodos);
@@ -71,7 +97,7 @@ function Todos() {
         const newTodos = [...todos, added];
 
         setTodos(newTodos);
-        setFilteredTodos(newTodos); 
+        setFilteredTodos(newTodos);
         setNewTitle("");
     };
 
