@@ -1,19 +1,17 @@
 import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getUsers } from "../API/usersApi";
+import { getUserByCredentials } from "../API/usersApi";
 import { MyContext } from "../context";
 import "../css/login.css";
 
 function Login() {
+  
   const { currentUser, setCurrentUser } = useContext(MyContext);
-
-
-  const [form, setForm] = useState({
-    username: "",
-    password: ""
-  });
+  const [form, setForm] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
+
   const navigate = useNavigate();
+
   useEffect(() => {
     if (currentUser) {
       navigate(`/home/users/${currentUser.id}`);
@@ -22,21 +20,13 @@ function Login() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setForm(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    setForm(prev => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      const users = await getUsers();
-
-      const user = users.find(
-        u => u.username === form.username && u.website === form.password
-      );
+      const user = await getUserByCredentials(form.username, form.password);
 
       if (!user) {
         setError("שם משתמש או סיסמה שגויים");
@@ -53,9 +43,6 @@ function Login() {
       setCurrentUser(DetailsUser);
 
       navigate(`/home/users/${DetailsUser.id}`);
-
-
-
     } catch (err) {
       setError("שגיאה בהתחברות לשרת");
     }

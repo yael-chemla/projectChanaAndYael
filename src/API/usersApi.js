@@ -13,3 +13,15 @@ export const getUsers = async () => {
 export const createUser = async (user) => {
   return addItem(user,"users");
 };
+
+// src/API/usersApi.js
+export const getUserByCredentials = async (username, password) => {
+  try {
+    const res = await fetch(`http://localhost:3000/users?username=${username}&website=${password}`);
+    const data = await res.json();
+    return data[0] || null; // אם נמצא – מחזיר את המשתמש, אם לא – null
+  } catch (err) {
+    console.error("Error fetching user:", err);
+    return null;
+  }
+};
