@@ -5,6 +5,7 @@ import MyPost from "./myPosts/MyPost";
 import "../css/post.css";
 import AddPost from "./myPosts/AddPost";
 import SearchPost from "./myPosts/SearchPost"
+import GeneralSearch  from "./GeneralSearch";
 
 function Posts() {
   const { currentUser } = useContext(MyContext);
@@ -66,7 +67,8 @@ function Posts() {
           setNewBody={setNewBody}
           handleAddPost={handleAddPost}
         />
-        <SearchPost posts={posts} onFilter={setFilteredPosts} />
+        <GeneralSearch items={posts} onFilter={setFilteredPosts}/>
+        {/* <SearchPost posts={posts} onFilter={setFilteredPosts} /> */}
       </div>
 
 
