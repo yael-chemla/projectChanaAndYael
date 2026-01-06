@@ -5,8 +5,8 @@ import "../css/todos.css";
 import MyTodo from "./myTodos/MyTodo";
 import AddTodo from "./myTodos/AddTodo";
 import Select from "./myTodos/Select";
-// import Search from "./myTodos/SearchTodos";
-import GeneralSearch  from "./GeneralSearch";
+import Search from "./myTodos/SearchTodos";
+// import GeneralSearch  from "./GeneralSearch";
 
 
 function Todos() {
@@ -115,9 +115,9 @@ function Todos() {
 
                 <Select todos={todos} onFilter={setFilteredTodos} />
                 <br></br>
-                <GeneralSearch items={todos} onFilter={setFilteredTodos} />
+                {/* <GeneralSearch items={todos} onFilter={setFilteredTodos} /> */}
 
-                {/* <Search todos={todos} onFilter={setFilteredTodos} /> */}
+                <Search todos={todos} onFilter={setFilteredTodos} />
 
             </div>
 

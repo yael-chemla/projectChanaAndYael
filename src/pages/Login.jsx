@@ -43,10 +43,6 @@ function Login() {
         return;
       }
 
-      // localStorage.setItem("currentUser", JSON.stringify(user));
-      // setCurrentUser(user);
-      // navigate(`/home/users/${user.id}`);
-
       const DetailsUser = {
         id: user.id,
         name: user.name,

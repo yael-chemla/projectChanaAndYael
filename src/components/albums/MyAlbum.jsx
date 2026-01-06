@@ -5,7 +5,7 @@ function MyAlbum({ album }) {
     <li className="album-item">
       <div className="album-id">#{album.id}</div>
 
-      <Link to={`${album.id}`} className="album-link">
+      <Link to={`${album.id}/photos`} className="album-link">
         <span className="album-title">{album.title}</span>
       </Link>
     </li>

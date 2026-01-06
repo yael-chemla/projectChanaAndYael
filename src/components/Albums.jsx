@@ -1,102 +1,79 @@
-// import { useContext, useEffect, useState } from "react";
-// import { MyContext } from "../context";
-// import { getAlbumsByUser } from "../API/albumsApi";
-// import { getPhotosByAlbum } from "../API/photosApi";
-// import { Outlet } from "react-router-dom";
-
-// function Albums() {
-//   const { currentUser } = useContext(MyContext);
-//   const [albums, setAlbums] = useState([]);
-//   const [photos, setPhotos] = useState([]);
-//   const [selectedAlbumId, setSelectedAlbumId] = useState(null);
-
-//   useEffect(() => {
-//     if (!currentUser) return;
-
-//     getAlbumsByUser(currentUser.id).then(setAlbums);
-//   }, [currentUser]);
-
-//   const handleAlbumClick = async (albumId) => {
-//     setSelectedAlbumId(albumId);
-//     const albumPhotos = await getPhotosByAlbum(albumId);
-//     setPhotos(albumPhotos);
-//   };
-
-//   return (
-//     <div>
-//       <h2>{currentUser?.name}'s Albums</h2>
-//       <ul>
-//         {albums.map(album => (
-//           <li key={album.id} onClick={() => handleAlbumClick(album.id)} style={{ cursor: "pointer", fontWeight: "bold" }}>
-//             {album.title}
-//           </li>
-//         ))}
-//       </ul>
-
-//       {selectedAlbumId && (
-//         <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
-//           {photos.map(photo => (
-//             <img
-//               key={photo.id}
-//               src={photo.url}
-//               alt={photo.title}
-//               style={{ width: "150px", height: "150px", objectFit: "cover", borderRadius: "8px" }}
-//             />
-//           ))}
-//           <Outlet/>
-//         </div>
-       
-//       )}
-//     </div>
-//   );
-// }
-
-// export default Albums;
-import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useState, useContext, useEffect } from "react";
 import { MyContext } from "../context";
 import { getAlbumsByUser } from "../API/albumsApi";
 import MyAlbum from "../components/albums/MyAlbum";
 import GeneralSearch from "../components/GeneralSearch";
-import { Link } from "react-router-dom";
+import AddAlbum from "./albums/AddAlbum";
+import Photos from "./albums/photo/Photos";
 
 function Albums() {
   const { currentUser } = useContext(MyContext);
+  const navigate = useNavigate();
+  const [albums, setAlbums] = useState([]);
+  const [filtered, setFiltered] = useState([]);
+  const [newTitle, setNewTitle] = useState("");
 
-  const [albums, setAlbums] = useState([]);        // מקור
-  const [filtered, setFiltered] = useState([]);   // תצוגה
+  const [selectedAlbumId, setSelectedAlbumId] = useState(null); // ✅ אילו אלבום נבחר
 
   useEffect(() => {
     if (!currentUser) return;
 
     getAlbumsByUser(currentUser.id).then(data => {
       setAlbums(data);
-      setFiltered(data); // בהתחלה – הכל
+      setFiltered(data);
     });
   }, [currentUser]);
 
+  const handleAddAlbum = async () => {
+    if (!newTitle.trim()) return;
+    const newAlbum = { userId: currentUser.id, title: newTitle };
+    // כאן את צריכה לקרוא ל-addAlbum מה-API שלך כמו שעשית
+    // נניח שזה מחזיר את האלבום החדש
+    const savedAlbum = await addAlbum(newAlbum);
+    setAlbums(prev => [...prev, savedAlbum]);
+    setFiltered(prev => [...prev, savedAlbum]);
+    setNewTitle("");
+  };
+
+  // ✅ פונקציה לבחירת אלבום
+  const handleSelectAlbum = (id) => {
+    setSelectedAlbumId(id);
+  };
+
+  const handleBackToAlbums = () => {
+    setSelectedAlbumId(null);
+    navigate(`/home/users/${currentUser.id}/albums`);
+  };
+
   return (
     <div>
-      <h2>Albums</h2>
-
-      {/* 🔍 חיפוש */}
-      <GeneralSearch
-        items={albums}
-        onFilter={setFiltered}
-      />
-
-      <Link to="add">
-        <button>Add Album</button>
-      </Link>
-
-      <ul>
-        {filtered.map(album => (
-          <MyAlbum key={album.id} album={album} />
-        ))}
-      </ul>
+      {!selectedAlbumId ? (
+        <>
+          <GeneralSearch items={albums} onFilter={setFiltered} />
+          <AddAlbum
+            newTitle={newTitle}
+            setNewTitle={setNewTitle}
+            handleAddAlbum={handleAddAlbum}
+          />
+          <ul>
+            {filtered.map(album => (
+              <li key={album.id} onClick={() => handleSelectAlbum(album.id)}>
+                <MyAlbum album={album} />
+              </li>
+            ))}
+          </ul>
+        </>
+      ) : (
+        <>
+        <br></br>
+          <button onClick={handleBackToAlbums}>← Back to albums</button>
+          <Photos albumId={selectedAlbumId} />
+        </>
+      )}
     </div>
   );
 }
 
 export default Albums;
-
 

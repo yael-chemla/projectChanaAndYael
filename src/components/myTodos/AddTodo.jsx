@@ -2,7 +2,6 @@ import { useContext } from "react";
 import { MyContext } from "../../context";
 
 function AddTodo({ newTitle, setNewTitle, handleAddTodo }) {
-    const { currentUser } = useContext(MyContext);
 
     return (
         <div className="todos-container">
