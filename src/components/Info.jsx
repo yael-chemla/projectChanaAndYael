@@ -14,6 +14,7 @@ function Info({ isVisible, onClose }) {
       getUserInfo(currentUser.id)
         .then((data) => setUserInfo(data))
         .finally(() => setLoading(false));
+
     }
   }, [currentUser, isVisible]);
 
@@ -23,7 +24,8 @@ function Info({ isVisible, onClose }) {
     <div className="info-overlay">
       <div className="info-panel">
         <button className="close-btn" onClick={onClose}>X</button>
-
+        <br></br>
+        <br></br>
         {loading ? (
           <p>Loading...</p>
         ) : userInfo ? (

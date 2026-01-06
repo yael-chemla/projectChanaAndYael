@@ -40,13 +40,6 @@ function MyPost({ post, isSelected, onSelect, canEdit, handleDelete, handleUpdat
 
   return (
     <div className={`post-card ${showFullPost ? "expanded" : ""}`}>
-      {/* רק כותרת ו-ID */}
-      {/* <div>
-        <strong>ID:</strong> {post.id} 
-              <br></br>
-
-        <strong>Title:</strong> {post.title}
-      </div> */}
       <div className="post-header">
         <div className="post-title">
           <strong>ID:</strong> {post.id}
