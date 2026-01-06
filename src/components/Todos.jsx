@@ -2,9 +2,9 @@ import { useContext, useEffect, useState } from "react";
 import { MyContext } from "../context";
 import { getTodosByUser, addTodo, deleteTodo, updateTodoTitle, toggleTodoCompleted } from "../API/todosApi";
 import "../css/todos.css";
-import MyTodo from "../components/myTodos/MyTodo";
-import AddTodo from "../components/myTodos/AddTodo";
-import Select from "../components/myTodos/Select";
+import MyTodo from "./myTodos/MyTodo";
+import AddTodo from "./myTodos/AddTodo";
+import Select from "./myTodos/Select";
 import Search from "./myTodos/SearchTodos";
 
 

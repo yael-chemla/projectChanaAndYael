@@ -1,4 +1,4 @@
-import {  Routes, Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import { MyProvider } from "./context";
 import Login from "../src/pages/Login"
 import Register from "../src/pages/Register"
@@ -9,6 +9,7 @@ import Albums from "../src/components/Albums"
 import Info from "../src/components/Info"
 import Posts from "../src/components/Posts"
 import ProtectedRoute from "./ProtectedRoute"
+import Photos from "../src/components/albums/photo/Photos"
 
 import './App.css'
 function App() {
@@ -16,22 +17,24 @@ function App() {
   return (
     <>
       <MyProvider>
-          <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/register-details" element={<RegisterDetails />} />
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/register-details" element={<RegisterDetails />} />
 
-            <Route path="/home/users/:id" element={
-              <ProtectedRoute>
-                <Home />
-              </ProtectedRoute>}>
-              <Route path="todos" element={<Todos />} />
-              <Route path="albums" element={<Albums />} />
-              <Route path="info" element={<Info />} />
-              <Route path="posts" element={<Posts />} />
+          <Route path="/home/users/:id" element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>}>
+            <Route path="todos" element={<Todos />} />
+            <Route path="info" element={<Info />} />
+            <Route path="posts" element={<Posts />} />
+            <Route path="albums" element={<Albums />}>
+              <Route path=":albumId" element={<Photos />} />
             </Route>
-          </Routes>
+          </Route>
+        </Routes>
       </MyProvider >
 
     </>
