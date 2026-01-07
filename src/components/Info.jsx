@@ -35,8 +35,9 @@ function Info({ isVisible, onClose }) {
             <p><b>Username:</b> {userInfo.username}</p>
             <p><b>Email:</b> {userInfo.email}</p>
             <p><b>Phone:</b> {userInfo.phone}</p>
-            <p><b>Website:</b> {userInfo.website}</p>
-            <p><b>Address:</b> {userInfo.address?.street}, {userInfo.address?.city}</p>
+            <p><b>Address:</b>  </p>
+            <p><b>City:</b>{userInfo.address?.city}</p>
+            <p><b>Street:</b>{userInfo.address?.street}</p>
             <p><b>Company:</b> {userInfo.company?.name}</p>
           </div>
         ) : (

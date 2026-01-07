@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { getPhotosByAlbum, deletePhoto, updatePhotoUrl } from "../../../API/photosApi";
+import { getPhotosByAlbum, deletePhoto, updatePhotoUrl, addPhoto } from "../../../API/photosApi";
 import MyPhoto from "./MyPhoto";
+import "../../../css/photos.css"
+import AddPhoto from "../photo/AddPhoto";
+
 
 function Photos() {
   const { albumId } = useParams();
   const navigate = useNavigate();
   const [photos, setPhotos] = useState([]);
+   const [newTitle, setNewTitle] = useState("");
+  const [newUrl, setNewUrl] = useState("");
 
   useEffect(() => {
     getPhotosByAlbum(albumId).then(setPhotos);
@@ -21,6 +26,20 @@ function Photos() {
     const updated = await updatePhotoUrl(id, newUrl);
     setPhotos(prev => prev.map(p => (p.id === id ? updated : p)));
   };
+  const handleAddPhoto = async () => {
+    if (!newTitle.trim() || !newUrl.trim()) return;
+
+    const photo = {
+      albumId,
+      title: newTitle,
+      url: newUrl
+    };
+
+    const savedPhoto = await addPhoto(photo);
+    setPhotos(prev => [...prev, savedPhoto]);
+    setNewTitle("");
+    setNewUrl("");
+  };
 
   return (
     <div className="photos-page">
@@ -34,7 +53,18 @@ function Photos() {
             handleUpdatePhotoUrl={handleUpdatePhotoUrl}
           />
         ))}
+        
       </div>
+         <div className="photos-sidebar">
+              <AddPhoto
+                newTitle={newTitle}
+                setNewTitle={setNewTitle}
+                newUrl={newUrl}
+                setNewUrl={setNewUrl}
+                handleAddPhoto={handleAddPhoto}
+              />
+              <br />
+            </div>
     </div>
   );
 }

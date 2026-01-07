@@ -1,4 +1,6 @@
+import { deleteItem, updateItem, addItem } from "./generalApi"
 
+const PHOTOS_URL = "http://localhost:3000/photos";
 export const getPhotosByAlbum = async (albumId) => {
   try {
     const res = await fetch(
@@ -12,19 +14,13 @@ export const getPhotosByAlbum = async (albumId) => {
 };
 
 export const deletePhoto = async (photoId) => {
-  await fetch(`http://localhost:3000/photos/${photoId}`, {
-    method: "DELETE",
-  });
+  return deleteItem(photoId, "photos");
 };
 
 export const updatePhotoUrl = async (photoId, newUrl) => {
-  const res = await fetch(`http://localhost:3000/photos/${photoId}`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ url: newUrl }),
-  });
-
-  return await res.json();
+  return updateItem(photoId, { url: newUrl }, "photos");
 };
+export async function addPhoto(photo) {
+  return addItem(photo, "photos");
+}
+

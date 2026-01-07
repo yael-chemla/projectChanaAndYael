@@ -7,6 +7,8 @@ import GeneralSearch from "../components/GeneralSearch";
 import AddAlbum from "./albums/AddAlbum";
 import Photos from "./albums/photo/Photos";
 import "../css/album.css";
+import "../css/photos.css";
+import AddPhoto from "../../src/components/albums/photo/AddPhoto";
 
 function Albums() {
   const { currentUser } = useContext(MyContext);
@@ -14,7 +16,6 @@ function Albums() {
   const [albums, setAlbums] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [newTitle, setNewTitle] = useState("");
-
   const [selectedAlbumId, setSelectedAlbumId] = useState(null);
 
   useEffect(() => {
@@ -43,37 +44,43 @@ function Albums() {
     setSelectedAlbumId(null);
     navigate(`/home/users/${currentUser.id}/albums`);
   };
+  
 
   return (
     <div className="albums-page">
-      {/* ======= סרגל צד ======= */}
-      <div className="albums-sidebar">
-        <AddAlbum
-          newTitle={newTitle}
-          setNewTitle={setNewTitle}
-          handleAddAlbum={handleAddAlbum}
-        />
-        <br />
-        <GeneralSearch items={albums} onFilter={setFiltered} />
-      </div>
-
       <main className="albums-content">
         {!selectedAlbumId ? (
-          <ul className="albums-grid">
-            {filtered.map(album => (
-              <li key={album.id} onClick={() => handleSelectAlbum(album.id)}>
-                <MyAlbum album={album} />
-              </li>
-            ))}
-          </ul>
+          <>
+            {/* ======= סרגל צד ======= */}
+            <div className="albums-sidebar">
+              <AddAlbum
+                newTitle={newTitle}
+                setNewTitle={setNewTitle}
+                handleAddAlbum={handleAddAlbum}
+              />
+              <br />
+              <GeneralSearch items={albums} onFilter={setFiltered} />
+            </div>
+
+            <ul className="albums-grid">
+              {filtered.map(album => (
+                <li key={album.id} onClick={() => handleSelectAlbum(album.id)}>
+                  <MyAlbum album={album} />
+                </li>
+              ))}
+            </ul>
+          </>
         ) : (
           <>
-            <button onClick={handleBackToAlbums}>← Back to albums</button>
+
+            <button id="back-button" onClick={handleBackToAlbums}>← Back to albums</button>
             <Photos albumId={selectedAlbumId} />
+         
           </>
-        )}
-      </main>
-    </div>
+        )
+        }
+      </main >
+    </div >
   );
 }
 
