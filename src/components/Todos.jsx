@@ -102,12 +102,12 @@ function Todos() {
     };
     const showCompleted = () => {
         const filtered = todos.filter(t => t.completed === true);
-        onFilter(filtered);
+        setFilteredTodos(filtered);
     };
 
     const showNotCompleted = () => {
         const filtered = todos.filter(t => t.completed === false);
-        onFilter(filtered);
+        setFilteredTodos(filtered);
     };
 
     return (
