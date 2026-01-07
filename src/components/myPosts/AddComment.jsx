@@ -22,6 +22,24 @@ function AddComment({ postId, onAdd }) {
       setBody("");
     }
   };
+  // const handleSubmit = async (e) => {
+  //   e?.preventDefault(); // מונע רענון או כפילות אם בתוך form
+  //   if (!body.trim()) return;
+
+  //   const newComment = {
+  //     postId,
+  //     email: currentUser.email,
+  //     body
+  //   };
+
+  //   const savedComment = await addComment(newComment);
+
+  //   if (savedComment) {
+  //     onAdd(savedComment);
+  //     setBody("");
+  //   }
+  // };
+
 
   return (
     <div className="add-comment-form">
@@ -30,7 +48,7 @@ function AddComment({ postId, onAdd }) {
         value={body}
         onChange={(e) => setBody(e.target.value)}
       />
-      <button onClick={handleSubmit}>Add Comment</button>
+      <button type="button" onClick={handleSubmit}>Add Comment</button>
     </div>
   );
 }

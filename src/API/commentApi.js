@@ -13,6 +13,7 @@ export const getCommentsByPost = async (postId) => {
 };
 
 export const addComment = async (comment) => {
+  console.log("פעמיים הכנסה")
   return addItem(comment,"comments");
 };
 

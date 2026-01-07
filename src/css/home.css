@@ -1,0 +1,43 @@
+/* Container for the welcome message */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  margin-top: 2rem;
+  background: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+}
+
+/* Spacer to keep some gap below the header */
+.header-spacer {
+  height: 60px; /* adjust based on header height */
+}
+
+/* Main title */
+.home-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+/* Welcome message text */
+.welcome-message {
+  font-size: 1.1rem;
+  color: #555;
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+/* Optional: small animation to make it lively */
+.home-container {
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}

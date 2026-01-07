@@ -12,11 +12,21 @@ function MyPost({ post, isSelected, onSelect, canEdit, handleDelete, handleUpdat
   const [comments, setComments] = useState([]);
   const [showComments, setShowComments] = useState(false);
 
+  // useEffect(() => {
+  //   if (showComments) {
+  //     getCommentsByPost(post.id).then(setComments);
+  //   }
+  // }, [showComments]);
   useEffect(() => {
-    if (showComments) {
-      getCommentsByPost(post.id).then(setComments);
-    }
-  }, [showComments]);
+    getCommentsByPost(post.id).then(data => {
+      // filter duplicates
+      const uniqueComments = Array.from(new Map(data.map(c => [c.id, c])).values());
+      setComments(uniqueComments);
+    });
+  }, [post.id]);
+
+
+
 
   const handleCommentAdd = async (comment) => {
     const saved = await addComment(comment);
@@ -78,17 +88,17 @@ function MyPost({ post, isSelected, onSelect, canEdit, handleDelete, handleUpdat
           </button>
 
           {showComments && (
-              <div className="comments-list">
-                <AddComment postId={post.id} onAdd={handleCommentAdd} />
-                {comments.map(comment => (
-                  <Comment
-                    key={comment.id}
-                    comment={comment}
-                    onUpdate={handleCommentUpdate}
-                    onDelete={handleCommentDelete}
-                  />
-                ))}
-              </div> 
+            <div className="comments-list">
+              <AddComment postId={post.id} onAdd={handleCommentAdd} />
+              {comments.map(comment => (
+                <Comment
+                  key={comment.id}
+                  comment={comment}
+                  onUpdate={handleCommentUpdate}
+                  onDelete={handleCommentDelete}
+                />
+              ))}
+            </div>
           )}
         </div>
       )}

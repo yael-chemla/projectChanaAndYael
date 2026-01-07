@@ -16,6 +16,8 @@ function Posts() {
   const [filteredTodos, setFilteredPosts] = useState([]);
 
 
+
+
   useEffect(() => {
     if (!currentUser) return;
     getPosts().then(data => {
