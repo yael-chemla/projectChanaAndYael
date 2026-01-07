@@ -9,7 +9,7 @@
 //     const data = await response.json();
 //     return data;
 //   } catch (error) {
-//     alert(error);
+//     console.error(error);
 //     return null;
 //   }
 //   //  return getByUser(userId,'users')
