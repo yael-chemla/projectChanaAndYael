@@ -1,3 +1,20 @@
+// import {getByUser} from "../API/generalApi"; 
+// // src/API/infoApi.js
+// export async function getUserInfo(userId) {
+//   try {
+//     const response = await fetch(`http://localhost:3000/users/${userId}`);
+//     if (!response.ok) {
+//       throw new Error("Failed to fetch user info");
+//     }
+//     const data = await response.json();
+//     return data;
+//   } catch (error) {
+//     console.error(error);
+//     return null;
+//   }
+//   //  return getByUser(userId,'users')
+// }
+// src/API/infoApi.js
 import {getByUser} from "../API/generalApi"; 
 
 export const getUserInfo = async (userId) => {
@@ -12,7 +29,7 @@ export const getUserInfo = async (userId) => {
     // נחזיר את המשתמש הראשון
     return users[0];
   } catch (error) {
-    console.error("Error fetching user info:", error);
+    alert("Error fetching user info:", error);
     return null;
   }
 };

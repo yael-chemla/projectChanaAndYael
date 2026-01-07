@@ -1,16 +1,22 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { MyContext } from "../../context";
 
 function MyAlbum({ album }) {
+  const { currentUser } = useContext(MyContext);
+
   return (
-    <li className="album-item">
+    <div className="album-card">
       <div className="album-id">#{album.id}</div>
 
-      <Link to={`${album.id}/photos`} className="album-link">
-        <span className="album-title">{album.title}</span>
+      <Link
+        to={`/home/users/${currentUser.id}/albums/${album.id}/photos`}
+        className="album-link"
+      >
+        <div className="album-title">{album.title}</div>
       </Link>
-    </li>
+    </div>
   );
 }
 
 export default MyAlbum;
-

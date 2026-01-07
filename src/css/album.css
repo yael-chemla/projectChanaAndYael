@@ -1,5 +1,11 @@
-/* ---------- סרגל צד ימין ---------- */
-.sidebar {
+.albums-page {
+  display: flex;
+  flex-direction: row-reverse;
+  min-height: 100vh;
+}
+
+/* ===== סרגל צד ===== */
+.albums-sidebar {
   position: fixed;
   top: 60px;
   right: 0;
@@ -7,72 +13,60 @@
   height: calc(100vh - 60px);
   background: #f0f0f0;
   padding: 20px;
-  box-shadow: -2px 0 6px rgba(0,0,0,0.1);
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 15px;
   overflow-y: auto;
+  box-shadow: -2px 0 6px rgba(0,0,0,0.1);
+  border-left: 1px solid #e0e6ed;
   z-index: 10;
 }
 
-/* ---------- קלטים וכפתורים בתוך הסרגל ---------- */
-.sidebar input {
-  width: 100%;
-  padding: 8px 10px;
-  border-radius: 12px;
-  border: 1px solid #ccc;
-  font-size: 14px;
-  margin-bottom: 10px;
-  box-sizing: border-box;
-}
-
-.sidebar button {
-  width: 100%;
-  padding: 8px 0;
-  border-radius: 12px;
-  border: none;
-  background: #007bff;
-  color: #fff;
-  cursor: pointer;
-  font-size: 14px;
-  margin-bottom: 8px;
-  transition: 0.2s;
-}
-
-.sidebar button:hover {
-  background: #0056b3;
-}
-
-/* כפתור Show All קצת יותר כהה */
-.sidebar .show-all {
-  background: #555;
-}
-
-.sidebar .show-all:hover {
-  background: #333;
-}
-
-/* ---------- עיצוב ספציפי ל-GeneralSearch ---------- */
-.general-search {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-/* שורה עם קלט + כפתורים חיפוש */
-.general-search .search-row {
-  display: flex;
-  gap: 5px;
-}
-
-/* קיצוץ רוחב כפתורים בשורה */
-.general-search .search-row button {
+/* תוכן */
+.albums-content {
   flex: 1;
+  margin-right: 320px;
+  padding: 20px;
 }
 
-/* ---------- עיצוב ספציפי ל-AddAlbum ---------- */
-.add-album {
+.albums-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.album-card {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
+}
+
+.album-id {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.album-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #0a2540;
+}
+
+/* רספונסיביות */
+@media (max-width: 900px) {
+  .albums-page {
+    flex-direction: column;
+  }
+  .albums-sidebar,
+  .albums-content {
+    width: 100%;
+    margin-right: 0;
+  }
+  .albums-grid {
+    grid-template-columns: 1fr;
+  }
 }

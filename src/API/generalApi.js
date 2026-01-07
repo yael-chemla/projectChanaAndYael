@@ -6,7 +6,7 @@ export const getByUser = async (userId,type) => {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error("Error fetching :", error);
+    alert("Error fetching :", error);
     return [];
   }
 };
@@ -25,7 +25,7 @@ export const addItem = async (item, type) => {
 
     return await response.json();
   } catch (error) {
-    console.error("Error adding item:", error);
+    alert("Error adding item: " + error);
     return null;
   }
 };
@@ -43,7 +43,7 @@ export const deleteItem = async (id, type) => {
 
     return true;
   } catch (error) {
-    console.error("Error deleting item:", error);
+    alert("Error deleting item:", error);
     return false;
   }
 };
@@ -57,7 +57,7 @@ export const updateItem = async (id, updatedFields,type) => {
     });
     return await response.json();
   } catch (error) {
-    console.error("Error updating comment:", error);
+    alert("Error updating comment:", error);
     return null;
   }
 };

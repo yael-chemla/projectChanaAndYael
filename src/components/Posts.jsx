@@ -4,9 +4,7 @@ import { getPosts, deletePost, addPost, updatePost } from "../API/postsApi";
 import MyPost from "./myPosts/MyPost";
 import "../css/post.css";
 import AddPost from "./myPosts/AddPost";
-// import SearchPost from "./myPosts/SearchPost"
-// import GeneralSearch  from "./GeneralSearch";
-import SearchPost from "./myPosts/SearchPost";
+import GeneralSearch  from "./GeneralSearch";
 
 
 function Posts() {
@@ -69,8 +67,8 @@ function Posts() {
           setNewBody={setNewBody}
           handleAddPost={handleAddPost}
         />
-        {/* <GeneralSearch items={posts} onFilter={setFilteredPosts}/> */}
-        <SearchPost posts={posts} onFilter={setFilteredPosts} />
+       <GeneralSearch items={posts} onFilter={setFilteredPosts}/>
+        {/* <SearchPost posts={posts} onFilter={setFilteredPosts} /> */}
       </div>
 
 

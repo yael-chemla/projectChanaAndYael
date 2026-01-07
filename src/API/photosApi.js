@@ -6,7 +6,7 @@ export const getPhotosByAlbum = async (albumId) => {
     );
     return await res.json();
   } catch (err) {
-    console.error("Error fetching photos:", err);
+    alert("Error fetching photos:", err);
     return [];
   }
 };

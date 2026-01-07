@@ -7,7 +7,7 @@ export const getCommentsByPost = async (postId) => {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error("Error fetching comments:", error);
+    alert("Error fetching comments:", error);
     return [];
   }
 };

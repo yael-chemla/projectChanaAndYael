@@ -162,7 +162,8 @@
 .add-comment-form textarea,
 .select-posts select,
 .search-post input {
-  width: 100%;
+  width: 80%;
+  height: 100%;
   padding: 6px 8px;
   border-radius: 6px;
   border: 1px solid #ccc;

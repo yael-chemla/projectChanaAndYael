@@ -4,7 +4,7 @@ export const getAlbumsByUser = async (userId) => {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('Error fetching albums:', error);
+    alert('Error fetching albums:', error);
     return [];
   }
 };
@@ -22,7 +22,7 @@ export const addAlbum = async (album) => {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error("Error adding album:", error);
+    alert("Error adding album:", error);
     return null;
   }
 };

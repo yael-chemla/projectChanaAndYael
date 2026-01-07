@@ -5,8 +5,7 @@ import "../css/todos.css";
 import MyTodo from "./myTodos/MyTodo";
 import AddTodo from "./myTodos/AddTodo";
 import Select from "./myTodos/Select";
-import Search from "./myTodos/SearchTodos";
-// import GeneralSearch  from "./GeneralSearch";
+import GeneralSearch from "./GeneralSearch";
 
 
 function Todos() {
@@ -101,6 +100,15 @@ function Todos() {
         setFilteredTodos(newTodos);
         setNewTitle("");
     };
+    const showCompleted = () => {
+        const filtered = todos.filter(t => t.completed === true);
+        setFilteredTodos(filtered);
+    };
+
+    const showNotCompleted = () => {
+        const filtered = todos.filter(t => t.completed === false);
+        setFilteredTodos(filtered);
+    };
 
     return (
         <div className="todos-page">
@@ -115,10 +123,13 @@ function Todos() {
 
                 <Select todos={todos} onFilter={setFilteredTodos} />
                 <br></br>
-                {/* <GeneralSearch items={todos} onFilter={setFilteredTodos} /> */}
-
-                <Search todos={todos} onFilter={setFilteredTodos} />
-
+                <GeneralSearch items={todos} onFilter={setFilteredTodos} />
+                <div>
+                    <button onClick={showCompleted}>completed</button>
+                    <button onClick={showNotCompleted} style={{ marginLeft: "5px" }}>
+                        not completed
+                    </button>
+                </div>
             </div>
 
             <main className="todos-content">

@@ -5,7 +5,7 @@ export const getUsers = async () => {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('Error fetching users:', error);
+    alert('Error fetching users:', error);
     return [];
   }
 };
@@ -21,7 +21,7 @@ export const getUserByCredentials = async (username, password) => {
     const data = await res.json();
     return data[0] || null; // אם נמצא – מחזיר את המשתמש, אם לא – null
   } catch (err) {
-    console.error("Error fetching user:", err);
+    alert("Error fetching user:", err);
     return null;
   }
 };
