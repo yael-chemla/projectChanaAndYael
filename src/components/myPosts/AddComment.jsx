@@ -14,11 +14,13 @@ function AddComment({ postId, onAdd }) {
       email: currentUser.email,
       body
     };
+    console.log("הודפס")
+    // const savedComment = await addComment(newComment);
+         const savedComment = await onAdd(newComment);
 
-    const savedComment = await addComment(newComment); 
 
     if (savedComment) {
-      onAdd(savedComment); 
+      onAdd(savedComment);
       setBody("");
     }
   };

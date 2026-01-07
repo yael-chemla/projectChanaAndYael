@@ -30,13 +30,12 @@ export const MyProvider = ({ children }) => {
     setLoading(false); // סיימנו לטעון
   }, []);
 
-  const logout = () => {
-    localStorage.removeItem("currentUser");
-    setCurrentUser(null);
-  };
+ 
 
   return (
-    <MyContext.Provider value={{ currentUser, setCurrentUser, logout }}>
+    // <MyContext.Provider value={{ currentUser, setCurrentUser, logout }}>
+    <MyContext.Provider value={{ currentUser, setCurrentUser, loading }}>
+
       {!loading && children} {/* מחכים לטעינת המשתמש */}
     </MyContext.Provider>
   );

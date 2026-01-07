@@ -30,6 +30,8 @@ function MyPost({ post, isSelected, onSelect, canEdit, handleDelete, handleUpdat
 
   const handleCommentAdd = async (comment) => {
     const saved = await addComment(comment);
+    console.log( "הודפס777u")
+
     if (saved) setComments([...comments, saved]);
   };
 
