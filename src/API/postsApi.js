@@ -7,7 +7,7 @@ export const getPosts = async (userId) => {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error("Error fetching posts:", error);
+    alert("Error fetching posts:", error);
     return [];
   }
 };

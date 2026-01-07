@@ -1,10 +1,11 @@
 /* ===== RESET כללי ===== */
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  margin: 0;
   font-family: "Segoe UI", sans-serif;
   background-color: #f7f9fc;
   color: #111;
@@ -20,7 +21,7 @@ body {
 /* ===== סרגל צד ===== */
 .todos-sidebar {
   position: fixed;
-  top: 60px;                     /* אם יש header */
+  top: 60px;
   right: 0;
   width: 300px;
   height: calc(100vh - 60px);
@@ -31,15 +32,15 @@ body {
   gap: 15px;
   overflow-y: auto;
   box-shadow: -2px 0 6px rgba(0,0,0,0.1);
-  z-index: 10;
   border-left: 1px solid #e0e6ed;
+  z-index: 10;
 }
 
 /* כותרות */
 .todos-sidebar h2 {
-  margin: 0;
   font-size: 20px;
   color: #0a2540;
+  margin-bottom: 10px;
 }
 
 /* קופסאות בתוך הסרגל */
@@ -48,6 +49,18 @@ body {
   padding: 16px;
   border-radius: 12px;
   border: 1px solid #e1e8f0;
+}
+
+/* ===== Search Section ===== */
+.search-todos {
+  display: flex;
+  flex-direction: column; /* כפתורים מתחת לקלט */
+  gap: 8px;
+}
+
+.search-buttons {
+  display: flex;
+  gap: 8px; /* רווח בין הכפתורים */
 }
 
 /* ===== תוכן ראשי ===== */
@@ -74,6 +87,13 @@ body {
   gap: 10px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.08);
   min-height: 150px;
+  transition: all 0.2s ease;
+}
+
+/* שמירה על גודל גם כשמסננים */
+.todo-card.filtered {
+  min-height: 150px;
+  transform: none;
 }
 
 /* ID */
@@ -166,56 +186,6 @@ select:focus {
   opacity: 1;
 }
 
-/* ===== Search ===== */
-.todos-sidebar button {
-  margin-top: 6px;
-}
-
-/* ===== כרטיס תגובות ===== */
-.comment {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 8px;
-  margin-top: 8px;
-  background: #fafafa;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  position: relative;
-}
-
-/* כפתורי העריכה והמחיקה */
-.comment-actions,
-.post-body .post-actions {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 10px;
-}
-
-.comment-actions button,
-.post-body .post-actions button {
-  padding: 4px 8px;
-  font-size: 12px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  background: #fff;
-  cursor: pointer;
-}
-
-.comment-actions button:hover,
-.post-body .post-actions button:hover {
-  background: #f0f0f0;
-}
-
-/* כפתור תגובות קטן ומרכזי */
-.show-comments-btn {
-  display: block;
-  margin: 10px auto;
-  padding: 4px 10px;
-  font-size: 12px;
-}
-
 /* ===== רספונסיביות ===== */
 @media (max-width: 900px) {
   .todos-page {
@@ -236,4 +206,30 @@ select:focus {
   .todos-grid {
     grid-template-columns: 1fr;
   }
+}
+.general-search {
+  display: flex;
+  flex-direction: column; /* קלט מעל כפתורים */
+  gap: 8px;
+}
+
+.search-buttons {
+  display: flex;
+  gap: 8px; /* רווח בין כפתורי החיפוש */
+}
+.todos-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.todo-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 150px; /* גובה קבוע */
+  padding: 16px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
 }

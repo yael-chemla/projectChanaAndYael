@@ -9,7 +9,7 @@
 //     const data = await response.json();
 //     return data;
 //   } catch (error) {
-//     console.error(error);
+//     alert(error);
 //     return null;
 //   }
 //   //  return getByUser(userId,'users')
@@ -29,7 +29,7 @@ export const getUserInfo = async (userId) => {
     // נחזיר את המשתמש הראשון
     return users[0];
   } catch (error) {
-    console.error("Error fetching user info:", error);
+    alert("Error fetching user info:", error);
     return null;
   }
 };

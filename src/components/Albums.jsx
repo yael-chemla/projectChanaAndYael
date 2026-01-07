@@ -1,11 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useContext, useEffect } from "react";
 import { MyContext } from "../context";
-import { getAlbumsByUser } from "../API/albumsApi";
+import { getAlbumsByUser, addAlbum } from "../API/albumsApi";
 import MyAlbum from "../components/albums/MyAlbum";
 import GeneralSearch from "../components/GeneralSearch";
 import AddAlbum from "./albums/AddAlbum";
 import Photos from "./albums/photo/Photos";
+import "../css/album.css";
 
 function Albums() {
   const { currentUser } = useContext(MyContext);
@@ -14,7 +15,7 @@ function Albums() {
   const [filtered, setFiltered] = useState([]);
   const [newTitle, setNewTitle] = useState("");
 
-  const [selectedAlbumId, setSelectedAlbumId] = useState(null); // ✅ אילו אלבום נבחר
+  const [selectedAlbumId, setSelectedAlbumId] = useState(null);
 
   useEffect(() => {
     if (!currentUser) return;
@@ -28,15 +29,12 @@ function Albums() {
   const handleAddAlbum = async () => {
     if (!newTitle.trim()) return;
     const newAlbum = { userId: currentUser.id, title: newTitle };
-    // כאן את צריכה לקרוא ל-addAlbum מה-API שלך כמו שעשית
-    // נניח שזה מחזיר את האלבום החדש
     const savedAlbum = await addAlbum(newAlbum);
     setAlbums(prev => [...prev, savedAlbum]);
     setFiltered(prev => [...prev, savedAlbum]);
     setNewTitle("");
   };
 
-  // ✅ פונקציה לבחירת אלבום
   const handleSelectAlbum = (id) => {
     setSelectedAlbumId(id);
   };
@@ -47,33 +45,36 @@ function Albums() {
   };
 
   return (
-    <div>
-      {!selectedAlbumId ? (
-        <>
-          <GeneralSearch items={albums} onFilter={setFiltered} />
-          <AddAlbum
-            newTitle={newTitle}
-            setNewTitle={setNewTitle}
-            handleAddAlbum={handleAddAlbum}
-          />
-          <ul>
+    <div className="albums-page">
+      {/* ======= סרגל צד ======= */}
+      <div className="albums-sidebar">
+        <AddAlbum
+          newTitle={newTitle}
+          setNewTitle={setNewTitle}
+          handleAddAlbum={handleAddAlbum}
+        />
+        <br />
+        <GeneralSearch items={albums} onFilter={setFiltered} />
+      </div>
+
+      <main className="albums-content">
+        {!selectedAlbumId ? (
+          <ul className="albums-grid">
             {filtered.map(album => (
               <li key={album.id} onClick={() => handleSelectAlbum(album.id)}>
                 <MyAlbum album={album} />
               </li>
             ))}
           </ul>
-        </>
-      ) : (
-        <>
-        <br></br>
-          <button onClick={handleBackToAlbums}>← Back to albums</button>
-          <Photos albumId={selectedAlbumId} />
-        </>
-      )}
+        ) : (
+          <>
+            <button onClick={handleBackToAlbums}>← Back to albums</button>
+            <Photos albumId={selectedAlbumId} />
+          </>
+        )}
+      </main>
     </div>
   );
 }
 
 export default Albums;
-

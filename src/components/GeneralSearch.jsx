@@ -45,19 +45,22 @@ function GeneralSearch({ items, onFilter }) {
     //       all 
     //     </button>
     //   </div>
-      <div className="general-search">
-      <div className="search-row">
-        <input
-          type="text"
-          placeholder="Search..."
-          value={query}
-          onChange={e => setQuery(e.target.value)}
-        />
+    <div className="general-search">
+      <input
+        type="text"
+        placeholder="Search..."
+        value={query}
+        onChange={e => setQuery(e.target.value)}
+      />
+
+      <div className="search-buttons">
         <button onClick={searchById}>By ID</button>
         <button onClick={searchByTitle}>By Title</button>
       </div>
+
       <button className="show-all" onClick={showAll}>Show All</button>
     </div>
+
   );
 }
 
