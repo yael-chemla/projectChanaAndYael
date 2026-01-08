@@ -18,16 +18,6 @@ export const addPost = async (post) => {
   return addItem(post, "posts");
 };
 
-// מחיקת 
-// export const deletePost = async (id) => {
-//   const comments =  getCommentsByPost(postId);
-//    Promise.all(
-//     comments.map(comment =>
-//       deleteComment(comment.id)
-//     )
-//   );
-//   return deleteItem(id, "posts");
-// };
 export const deletePost = async (postId) => {
   try {
     // 1️⃣ קבל את כל התגובות של הפוסט
