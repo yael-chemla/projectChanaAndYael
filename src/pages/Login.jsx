@@ -5,11 +5,11 @@ import { MyContext } from "../context/context";
 import "../css/login.css";
 
 function Login() {
-  
+
   const { currentUser, setCurrentUser } = useContext(MyContext);
   const [form, setForm] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
-
+  //מאפשר  להעביר את המשתמש בין דפים
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -41,6 +41,8 @@ function Login() {
 
       localStorage.setItem("currentUser", JSON.stringify(DetailsUser));
       setCurrentUser(DetailsUser);
+  
+
 
       navigate(`/home/users/${DetailsUser.id}`);
     } catch (err) {
@@ -80,7 +82,7 @@ function Login() {
       </form>
 
       <p>
-       you have no accuont? <a onClick={goToRegister}>Register</a>
+        you have no accuont? <a onClick={goToRegister}>Register</a>
       </p>
     </div>
   );

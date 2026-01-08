@@ -2,7 +2,8 @@ import { Outlet, useOutlet } from "react-router-dom";
 import Header from "../components/Header";
 import "../css/home.css"
 function Home() {
-    const outlet = useOutlet();//בשביל התצוגה של רק אלבום פתוח או רק רשימה
+    // הוק שבודק האם מוצג כרגע דף פנימי 
+    const outlet = useOutlet();
     return (
         <div>
             <Header />
@@ -17,8 +18,8 @@ function Home() {
                     </p>
                 </div>
             )}
-
-            {outlet && <div className="header-spacer"></div>} {/* spacing below header */}
+            {/* {יותר בשביל עיצוב} */}
+            {outlet && <div className="header-spacer"></div>}
             <Outlet />
         </div>
     );

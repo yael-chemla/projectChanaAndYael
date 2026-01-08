@@ -1,9 +1,10 @@
-import { addItem,deleteItem,updateItem} from "../API/generalApi";
+import { addItem, deleteItem, updateItem } from "../API/generalApi";
 const BASE_URL = "http://localhost:3000";
 
 export const getCommentsByPost = async (postId) => {
   try {
     const response = await fetch(`${BASE_URL}/comments?postId=${postId}`);
+    if (!response.ok) throw new Error("שגיאה  ");
     const data = await response.json();
     return data;
   } catch (error) {
@@ -13,14 +14,13 @@ export const getCommentsByPost = async (postId) => {
 };
 
 export const addComment = async (comment) => {
-  console.log("פעמיים הכנסה")
-  return addItem(comment,"comments");
+  return addItem(comment, "comments");
 };
 
 export const updateComment = async (id, updatedFields) => {
-  return updateItem(id,updatedFields,"comments")
+  return updateItem(id, updatedFields, "comments")
 };
 
 export const deleteComment = async (id) => {
-  return deleteItem(id,"comments");
+  return deleteItem(id, "comments");
 };

@@ -4,10 +4,10 @@ const PHOTOS_URL = "http://localhost:3000/photos";
 
 export const getPhotosByAlbum = async (albumId, start = 0, limit = 6) => {
   try {
-    const res = await fetch(
+    const response = await fetch(
       `${PHOTOS_URL}?albumId=${albumId}&_start=${start}&_limit=${limit}`
     );
-    return await res.json();
+    return await response.json();
   } catch (err) {
     alert("Error fetching photos");
     return [];

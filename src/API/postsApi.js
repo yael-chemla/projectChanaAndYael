@@ -1,4 +1,4 @@
-import { getByUser, addItem, deleteItem, updateItem } from "./generalApi";
+import {  addItem, deleteItem, updateItem } from "./generalApi";
 import { deleteComment,getCommentsByPost } from "./commentApi";
 
 const BASE_URL = "http://localhost:3000";
@@ -20,15 +20,13 @@ export const addPost = async (post) => {
 
 export const deletePost = async (postId) => {
   try {
-    // 1️⃣ קבל את כל התגובות של הפוסט
     const comments = await getCommentsByPost(postId);
 
-    // 2️⃣ מחק את כל התגובות בו זמנית
+    //  מחק את כל התגובות בו זמנית
     await Promise.all(
       comments.map(comment => deleteComment(comment.id))
     );
 
-    // 3️⃣ מחק את הפוסט עצמו
     return await deleteItem(postId, "posts");
 
   } catch (error) {
@@ -41,5 +39,4 @@ export const deletePost = async (postId) => {
 // עדכון תוכן 
 export const updatePost = async (id, updatedFields) => {
   return updateItem(id, updatedFields, "posts")
-
 };

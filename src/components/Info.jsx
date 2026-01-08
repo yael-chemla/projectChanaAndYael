@@ -5,10 +5,11 @@ import "../css/info.css";
 
 function Info({ isVisible, onClose }) {
   const { currentUser } = useContext(MyContext);
-  const [userInfo, setUserInfo] = useState(null); 
+  const [userInfo, setUserInfo] = useState(null); //המידע של המשתמש שנשלף מה DB
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setUserInfo(null);
     if (currentUser && isVisible) {
       setLoading(true);
       getUserInfo(currentUser.id)
@@ -16,7 +17,13 @@ function Info({ isVisible, onClose }) {
         .finally(() => setLoading(false));
 
     }
-  }, [currentUser, isVisible]);
+  }, [currentUser?.id,, isVisible]);
+// console.log("currentUser")
+
+// console.log(currentUser)
+// console.log("userInfo")
+
+// console.log(userInfo)
 
   if (!isVisible) return null;
 
@@ -28,7 +35,8 @@ function Info({ isVisible, onClose }) {
         <br></br>
         {loading ? (
           <p>Loading...</p>
-        ) : userInfo ? (
+        ) :
+         userInfo ? (
           <div className="user-info">
             <p><b>ID:</b> {userInfo.id}</p>
             <p><b>Name:</b> {userInfo.name}</p>
@@ -42,7 +50,8 @@ function Info({ isVisible, onClose }) {
           </div>
         ) : (
           <p>No user info found.</p>
-        )}
+        )
+        }
       </div>
     </div>
   );

@@ -4,14 +4,14 @@ import { MyContext } from "./context/context";
 
 function ProtectedRoute({ children }) {
   const { currentUser, loading } = useContext(MyContext);
-  const location = useLocation();
 
   if (loading) return null;
 
   if (!currentUser) {
     alert("Please log in to access this page");
     return (
-      <Navigate to="/login" replace state={{ from: location.pathname }} />
+      //replace: מוחק את הכתובת הנוכחית מההיסטוריה (כדי שלחיצה על "חזור" בדפדפן לא תחזיר אותו לדף החסום).
+      <Navigate to="/login" replace  />
     );
   }
 

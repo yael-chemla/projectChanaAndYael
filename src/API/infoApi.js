@@ -1,19 +1,23 @@
-import {getByUser} from "../API/generalApi"; 
+
+const BASE_URL = "http://localhost:3000";
+const type="users";
 
 export const getUserInfo = async (userId) => {
   try {
-    const users = await getByUser(userId, "users");
+    const response = await fetch(`${BASE_URL}/${type}?id=${userId}`);
+    const data = await response.json();
 
-    // אם אין משתמש – נחזיר null
-    if (!users || !users[0]) {
-      return null;
+    console.log("data from API:", data);
+
+    if (data && data.length > 0) {
+      return data[0]; 
     }
 
-    // נחזיר את המשתמש הראשון
-    return users[0];
+    return null; 
   } catch (error) {
     alert("Error fetching user info:", error);
     return null;
   }
 };
+
 

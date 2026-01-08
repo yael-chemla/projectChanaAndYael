@@ -1,8 +1,10 @@
 const BASE_URL = "http://localhost:3000";
 
-export const getByUser = async (userId,type) => {
+export const getByUser = async (userId, type) => {
   try {
     const response = await fetch(`${BASE_URL}/${type}?userId=${userId}`);
+    if (!response.ok) throw new Error("שגיאה  ");
+
     const data = await response.json();
     return data;
   } catch (error) {
@@ -23,7 +25,8 @@ export const addItem = async (item, type) => {
     });
     if (!response.ok) throw new Error("שגיאה  ");
 
-    return await response.json();
+    const data = await response.json();
+    return data;
   } catch (error) {
     alert("Error adding item: " + error);
     return null;
@@ -48,7 +51,7 @@ export const deleteItem = async (id, type) => {
   }
 };
 //עדכון
-export const updateItem = async (id, updatedFields,type) => {
+export const updateItem = async (id, updatedFields, type) => {
   try {
     const response = await fetch(`${BASE_URL}/${type}/${id}`, {
       method: "PATCH",
