@@ -8,6 +8,7 @@ import AddAlbum from "./AddAlbum";
 import Photos from "./photo/Photos";
 import "../../css/album.css";
 import "../../css/photos.css";
+import GeneralAdd from "../GeneralAdd"
 
 function Albums() {
   const { currentUser } = useContext(MyContext);
@@ -43,7 +44,7 @@ function Albums() {
     setSelectedAlbumId(null);
     navigate(`/home/users/${currentUser.id}/albums`);
   };
-  
+
 
   return (
     <div className="albums-page">
@@ -51,10 +52,18 @@ function Albums() {
         {!selectedAlbumId ? (
           <>
             <div className="albums-sidebar">
-              <AddAlbum
+              {/* <AddAlbum
                 newTitle={newTitle}
                 setNewTitle={setNewTitle}
                 handleAddAlbum={handleAddAlbum}
+              /> */}
+              <GeneralAdd
+                value={newTitle}
+                setValue={setNewTitle}
+                onAdd={handleAddAlbum}
+                placeholder="New album title"
+                buttonText="Add Album"
+                isTextArea={false} // אלבום הוא בדרך כלל כותרת קצרה
               />
               <br />
               <GeneralSearch items={albums} onFilter={setFiltered} />
@@ -73,7 +82,7 @@ function Albums() {
 
             <button id="back-button" onClick={handleBackToAlbums}>← Back to albums</button>
             <Photos albumId={selectedAlbumId} />
-         
+
           </>
         )
         }
