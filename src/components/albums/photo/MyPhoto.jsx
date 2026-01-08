@@ -1,7 +1,6 @@
 import { useState } from "react";
 import "../../../css/photos.css"
 
-
 function MyPhoto({ photo, handleDeletePhoto, handleUpdatePhotoUrl }) {
   const [isEditing, setIsEditing] = useState(false);
   const [newUrl, setNewUrl] = useState(photo.url);

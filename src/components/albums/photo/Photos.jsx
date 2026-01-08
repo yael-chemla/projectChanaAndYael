@@ -5,17 +5,45 @@ import MyPhoto from "./MyPhoto";
 import "../../../css/photos.css"
 import AddPhoto from "../photo/AddPhoto";
 
+const LIMIT = 6;
 
 function Photos() {
   const { albumId } = useParams();
-  const navigate = useNavigate();
+
   const [photos, setPhotos] = useState([]);
-   const [newTitle, setNewTitle] = useState("");
+  const [start, setStart] = useState(0);       // מאיפה להביא
+  const [hasMore, setHasMore] = useState(true); // יש עוד תמונות?
+  const [loading, setLoading] = useState(false);
+
+  const [newTitle, setNewTitle] = useState("");
   const [newUrl, setNewUrl] = useState("");
 
   useEffect(() => {
-    getPhotosByAlbum(albumId).then(setPhotos);
+    if (!albumId) return;
+    setPhotos([]);
+    setStart(0);
+    setHasMore(true);
+    loadMorePhotos(0);
   }, [albumId]);
+
+  const loadMorePhotos = async (currentStart = start) => {
+    if (loading || !hasMore) return;
+
+    setLoading(true);
+
+    const newPhotos = await getPhotosByAlbum(albumId, currentStart, LIMIT);
+
+    setPhotos(prev => [...prev, ...newPhotos]);
+    setStart(prev => prev + newPhotos.length);
+
+    if (newPhotos.length === 0 || newPhotos.length < LIMIT) {
+      setHasMore(false);
+    }
+
+    setLoading(false);
+  };
+
+
 
   const handleDeletePhoto = async (id) => {
     await deletePhoto(id);
@@ -53,18 +81,24 @@ function Photos() {
             handleUpdatePhotoUrl={handleUpdatePhotoUrl}
           />
         ))}
-        
+
       </div>
-         <div className="photos-sidebar">
-              <AddPhoto
-                newTitle={newTitle}
-                setNewTitle={setNewTitle}
-                newUrl={newUrl}
-                setNewUrl={setNewUrl}
-                handleAddPhoto={handleAddPhoto}
-              />
-              <br />
-            </div>
+      {hasMore && (
+        <button onClick={() => loadMorePhotos()} disabled={loading}>
+          {loading ? "Loading..." : "Load more"}
+        </button>
+      )}
+
+      <div className="photos-sidebar">
+        <AddPhoto
+          newTitle={newTitle}
+          setNewTitle={setNewTitle}
+          newUrl={newUrl}
+          setNewUrl={setNewUrl}
+          handleAddPhoto={handleAddPhoto}
+        />
+        <br />
+      </div>
     </div>
   );
 }

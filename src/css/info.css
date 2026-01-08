@@ -25,18 +25,28 @@
   box-shadow: 0 4px 20px rgba(0,0,0,0.3);
 }
 
-/* כפתור X מעל כל התוכן בפינה שמאלית עליונה */
 .close-btn {
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: 15px;
+  left: 15px;
   border: none;
-  background: transparent;
+  background-color: #1890ff; /* הצבע הקבוע */
+  color: white;               /* צבע הטקסט */
   font-size: 18px;
   font-weight: bold;
   cursor: pointer;
-  z-index: 10; /* לוודא שהוא מעל כל התוכן */
+  width: 60px;                /* קצת יותר רחב */
+  height: 35px;               /* קצת יותר גבוה */
+  border-radius: 8px;         /* קצוות מעוגלות אבל מלבני */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
+
+
+
+
 
 .info-section {
   margin-top: 40px; /* רווח כדי שהכפתור לא יכסה את הכותרת */

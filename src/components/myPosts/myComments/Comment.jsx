@@ -1,17 +1,34 @@
 import { useState, useContext } from "react";
-import { MyContext } from "../../context";
+import { MyContext } from "../../../context/context";
 
 function Comment({ comment, onUpdate, onDelete }) {
     const { currentUser } = useContext(MyContext);
     const [newBody, setNewBody] = useState(comment.body);
     const [isEditing, setIsEditing] = useState(false);
+    const [body, setBody] = useState("");
+    const isOwner = comment.email === currentUser.email;
 
     const handleSave = () => {
         onUpdate(comment.id, { body: newBody });
         setIsEditing(false);
     };
 
-    const isOwner = comment.email === currentUser.email;
+    const handleAddComment = async () => {
+        if (!body.trim()) return;
+
+        const newComment = {
+            postId,
+            email: currentUser.email,
+            body
+        };
+
+        const savedComment = await onAdd(newComment);
+
+        if (savedComment) {
+            onAdd(savedComment);
+            setBody("");
+        }
+    };
 
     return (
         <div className="comment">

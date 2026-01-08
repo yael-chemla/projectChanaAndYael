@@ -1,17 +1,17 @@
 import { Routes, Route } from 'react-router-dom'
-import { MyProvider } from "./context";
+import { MyProvider } from "./context/context";
 import Login from "../src/pages/Login"
 import Register from "../src/pages/Register"
 import RegisterDetails from "../src/pages/RegisterDetails"
 import Home from "../src/pages/Home"
-import Todos from "../src/components/Todos"
-import Albums from "../src/components/Albums"
+import Todos from "./components/myTodos/Todos"
+import Albums from "./components/albums/Albums"
 import Info from "../src/components/Info"
-import Posts from "../src/components/Posts"
+import Posts from "./components/myPosts/Posts"
 import ProtectedRoute from "./ProtectedRoute"
 import Photos from "../src/components/albums/photo/Photos"
 
-import './App.css'
+import './css/App.css'
 function App() {
 
   return (

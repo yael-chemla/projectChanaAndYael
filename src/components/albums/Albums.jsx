@@ -1,14 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useContext, useEffect } from "react";
-import { MyContext } from "../context";
-import { getAlbumsByUser, addAlbum } from "../API/albumsApi";
-import MyAlbum from "../components/albums/MyAlbum";
-import GeneralSearch from "../components/GeneralSearch";
-import AddAlbum from "./albums/AddAlbum";
-import Photos from "./albums/photo/Photos";
-import "../css/album.css";
-import "../css/photos.css";
-import AddPhoto from "../../src/components/albums/photo/AddPhoto";
+import { MyContext } from "../../context/context";
+import { getAlbumsByUser, addAlbum } from "../../API/albumsApi";
+import MyAlbum from "./MyAlbum";
+import GeneralSearch from "../GeneralSearch";
+import AddAlbum from "./AddAlbum";
+import Photos from "./photo/Photos";
+import "../../css/album.css";
+import "../../css/photos.css";
 
 function Albums() {
   const { currentUser } = useContext(MyContext);
@@ -51,7 +50,6 @@ function Albums() {
       <main className="albums-content">
         {!selectedAlbumId ? (
           <>
-            {/* ======= סרגל צד ======= */}
             <div className="albums-sidebar">
               <AddAlbum
                 newTitle={newTitle}

@@ -16,14 +16,13 @@ function Select({ todos, onFilter }) {
       }
       return a.id - b.id;
     });
-    
 
-    onFilter(sortedTodos); 
+    onFilter(sortedTodos);
   };
 
   return (
     <label>
-       sort by:{" "}
+      sort by:{" "}
       <select value={sortBy} onChange={handleSortChange}>
         <option value="id">ID</option>
         <option value="title">title</option>

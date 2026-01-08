@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import { MyContext } from "../../context";
+import { MyContext } from "../../context/context";
 
 function MyAlbum({ album }) {
   const { currentUser } = useContext(MyContext);

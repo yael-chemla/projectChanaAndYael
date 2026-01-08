@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { MyContext } from "../../context";
+import { MyContext } from "../../context/context";
 
 function AddPost({ newTitle, setNewTitle, newBody, setNewBody, handleAddPost }) {
   const { currentUser } = useContext(MyContext);

@@ -1,13 +1,7 @@
 import { useContext } from "react";
-import { MyContext } from "../../../context";
+import { MyContext } from "../../../context/context";
 
-function AddPhoto({
-  newTitle,
-  setNewTitle,
-  newUrl,
-  setNewUrl,
-  handleAddPhoto
-}) {
+function AddPhoto({ newTitle, setNewTitle, newUrl, setNewUrl, handleAddPhoto }) {
   const { currentUser } = useContext(MyContext);
 
   if (!currentUser) return null;

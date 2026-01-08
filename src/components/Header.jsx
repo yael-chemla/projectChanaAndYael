@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { MyContext } from "../context";
+import { MyContext } from "../context/context";
 import "../css/header.css";
 import Info from "../components/Info"
 

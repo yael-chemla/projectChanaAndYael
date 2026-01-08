@@ -1,11 +1,10 @@
 import { useContext, useEffect, useState } from "react";
-import { MyContext } from "../context";
-import { getPosts, deletePost, addPost, updatePost } from "../API/postsApi";
-import MyPost from "./myPosts/MyPost";
-import "../css/post.css";
-import AddPost from "./myPosts/AddPost";
-import GeneralSearch  from "./GeneralSearch";
-
+import { MyContext } from "../../context/context";
+import { getPosts, deletePost, addPost, updatePost } from "../../API/postsApi";
+import MyPost from "./MyPost";
+import "../../css/post.css";
+import AddPost from "./AddPost";
+import GeneralSearch  from "../GeneralSearch";
 
 function Posts() {
   const { currentUser } = useContext(MyContext);
@@ -14,9 +13,6 @@ function Posts() {
   const [newBody, setNewBody] = useState("");
   const [selectedPostId, setSelectedPostId] = useState(null);
   const [filteredTodos, setFilteredPosts] = useState([]);
-
-
-
 
   useEffect(() => {
     if (!currentUser) return;
@@ -70,9 +66,7 @@ function Posts() {
           handleAddPost={handleAddPost}
         />
        <GeneralSearch items={posts} onFilter={setFilteredPosts}/>
-        {/* <SearchPost posts={posts} onFilter={setFilteredPosts} /> */}
       </div>
-
 
       <div className="posts-content">
         {filteredTodos.map(post => (

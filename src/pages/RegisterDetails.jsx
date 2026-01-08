@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { createUser } from "../API/usersApi";
 import "../css/registerdetails.css";
-import { MyContext } from "../context";
+import { MyContext } from "../context/context";
 
 
 function RegisterDetails() {

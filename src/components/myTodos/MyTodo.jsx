@@ -19,7 +19,6 @@ function MyTodo({
     <div className="todo-card">
       <div className="todo-id">ID: {todo.id}</div>
 
-      {/* כותרת / עריכה */}
       {isEditing ? (
         <div className="edit-title">
           <input
@@ -32,7 +31,6 @@ function MyTodo({
         <div className="todo-title">{todo.title}</div>
       )}
 
-      {/* סימון בוצע */}
       <label>
         <input
           type="checkbox"
@@ -42,7 +40,6 @@ function MyTodo({
         Done
       </label>
 
-      {/* כפתורים */}
       <div className="todo-actions">
         {!isEditing && (
           <button onClick={() => setIsEditing(true)}>Edit</button>

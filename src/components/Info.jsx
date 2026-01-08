@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from "react";
-import { MyContext } from "../context";
+import { MyContext } from "../context/context";
 import { getUserInfo } from "../API/infoApi";
 import "../css/info.css";
 
 function Info({ isVisible, onClose }) {
   const { currentUser } = useContext(MyContext);
-  const [userInfo, setUserInfo] = useState(null); // <-- חשוב להגדיר את זה
+  const [userInfo, setUserInfo] = useState(null); 
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {

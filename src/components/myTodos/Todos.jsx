@@ -1,12 +1,12 @@
 import { useContext, useEffect, useState } from "react";
-import { MyContext } from "../context";
-import { getTodosByUser, addTodo, deleteTodo, updateTodoTitle, toggleTodoCompleted } from "../API/todosApi";
-import "../css/todos.css";
-import MyTodo from "./myTodos/MyTodo";
-import AddTodo from "./myTodos/AddTodo";
-import Select from "./myTodos/Select";
-import GeneralSearch from "./GeneralSearch";
-
+import { MyContext } from "../../context/context";
+import { getTodosByUser, addTodo, deleteTodo, updateTodoTitle, toggleTodoCompleted } from "../../API/todosApi";
+import "../../css/todos.css";
+import MyTodo from "./MyTodo";
+import AddTodo from "./AddTodo";
+import Select from "./Select";
+import GeneralSearch from "../GeneralSearch";
+import GeneralAdd from "../GeneralAdd"
 
 function Todos() {
     const { currentUser } = useContext(MyContext);
@@ -22,16 +22,6 @@ function Todos() {
         });
     }, [currentUser]);
 
-    // const handleToggleCompleted = async (todo) => {
-    //     const updated = await toggleTodoCompleted(todo.id, !todo.completed);
-
-    //     const newTodos = todos.map(t =>
-    //         t.id === todo.id ? updated : t
-    //     );
-
-    //     setTodos(newTodos);
-    //     setFilteredTodos(newTodos);
-    // };
     const handleToggleCompleted = async (id) => {
         const todo = todos.find(t => t.id === id);
 
@@ -45,8 +35,6 @@ function Todos() {
         setFilteredTodos(newTodos);
     };
 
-
-
     const handleDelete = async (id) => {
         await deleteTodo(id);
 
@@ -54,21 +42,6 @@ function Todos() {
         setTodos(newTodos);
         setFilteredTodos(newTodos);
     };
-
-
-    // const handleUpdateTitle = async (todo) => {
-    //     const newText = prompt("Enter new title:", todo.title);
-    //     if (!newText) return;
-
-    //     const updated = await updateTodoTitle(todo.id, newText);
-
-    //     const newTodos = todos.map(t =>
-    //         t.id === todo.id ? updated : t
-    //     );
-
-    //     setTodos(newTodos);
-    //     setFilteredTodos(newTodos);
-    // };
 
     const handleUpdateTitle = async (id, newTitle) => {
         if (!newTitle) return;
@@ -83,7 +56,6 @@ function Todos() {
         setFilteredTodos(newTodos);
     };
 
-
     const handleAddTodo = async () => {
         if (!newTitle) return;
 
@@ -95,7 +67,6 @@ function Todos() {
 
         const added = await addTodo(newTodo);
         const newTodos = [...todos, added];
-
         setTodos(newTodos);
         setFilteredTodos(newTodos);
         setNewTitle("");
@@ -114,13 +85,21 @@ function Todos() {
         <div className="todos-page">
 
             <div className="todos-sidebar">
-                <AddTodo
+                {/* <AddTodo
                     handleAddTodo={handleAddTodo}
                     setNewTitle={setNewTitle}
                     newTitle={newTitle}
-                />
-                <br></br>
+                /> */}
 
+                <br></br>
+                <GeneralAdd
+                    value={newTitle}
+                    setValue={setNewTitle}
+                    onAdd={handleAddTodo}
+                    placeholder="New todo title"
+                    buttonText="Add Todo"
+                    isTextArea={false} // Todo זה בדרך כלל שורה אחת (Input)
+                />
                 <Select todos={todos} onFilter={setFilteredTodos} />
                 <br></br>
                 <GeneralSearch items={todos} onFilter={setFilteredTodos} />

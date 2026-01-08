@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getUserByCredentials } from "../API/usersApi";
-import { MyContext } from "../context";
+import { MyContext } from "../context/context";
 import "../css/login.css";
 
 function Login() {
@@ -80,7 +80,7 @@ function Login() {
       </form>
 
       <p>
-        אין לך חשבון? <a onClick={goToRegister}>Register</a>
+       you have no accuont? <a onClick={goToRegister}>Register</a>
       </p>
     </div>
   );
