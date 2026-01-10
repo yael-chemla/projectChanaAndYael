@@ -6,6 +6,8 @@ const BASE_URL = "http://localhost:3000";
 export const getPosts = async (userId) => {
   try {
     const response = await fetch(`${BASE_URL}/posts`);
+     if (!response.ok) throw new Error("שגיאה  ");
+
     const data = await response.json();
     return data;
   } catch (error) {
@@ -13,6 +15,7 @@ export const getPosts = async (userId) => {
     return [];
   }
 };
+
 
 export const addPost = async (post) => {
   return addItem(post, "posts");
@@ -34,7 +37,6 @@ export const deletePost = async (postId) => {
     return false;
   }
 };
-
 
 // עדכון תוכן 
 export const updatePost = async (id, updatedFields) => {

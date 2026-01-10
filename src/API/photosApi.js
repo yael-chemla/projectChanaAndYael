@@ -7,7 +7,10 @@ export const getPhotosByAlbum = async (albumId, start = 0, limit = 6) => {
     const response = await fetch(
       `${PHOTOS_URL}?albumId=${albumId}&_start=${start}&_limit=${limit}`
     );
-    return await response.json();
+    if (!response.ok) throw new Error("שגיאה  ");
+
+    const data = await response.json();
+    return data;
   } catch (err) {
     alert("Error fetching photos");
     return [];

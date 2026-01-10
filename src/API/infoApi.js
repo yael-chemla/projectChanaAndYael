@@ -7,8 +7,6 @@ export const getUserInfo = async (userId) => {
     const response = await fetch(`${BASE_URL}/${type}?id=${userId}`);
     const data = await response.json();
 
-    console.log("data from API:", data);
-
     if (data && data.length > 0) {
       return data[0]; 
     }
