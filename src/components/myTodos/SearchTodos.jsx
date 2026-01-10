@@ -19,7 +19,7 @@ function SearchTodos({ todos, onFilter }) {
 
       <div>
         <button onClick={showCompleted}>completed</button>
-        <button onClick={showNotCompleted} style={{ marginLeft: "5px" }}>
+        <button onClick={showNotCompleted} >
           not completed 
         </button>
       </div>

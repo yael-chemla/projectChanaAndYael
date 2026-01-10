@@ -29,7 +29,7 @@ function Header() {
             <div className="menu">
                 <button onClick={() => goTo(`/home/users/${currentUser.id}/todos`)}>Todos</button>
                 <button onClick={() => goTo(`/home/users/${currentUser.id}/albums`)}>Albums</button>
-                <button onClick={() => setShowInfo(true)}>Info</button> {/* כאן פתיחת modal */}
+                <button onClick={() => setShowInfo(true)}>Info</button> 
                 <button onClick={() => goTo(`/home/users/${currentUser.id}/posts`)}>Posts</button>
             </div>
             <Info

@@ -15,15 +15,8 @@ function Info({ isVisible, onClose }) {
       getUserInfo(currentUser.id)
         .then((data) => setUserInfo(data))
         .finally(() => setLoading(false));
-
     }
   }, [currentUser?.id,, isVisible]);
-// console.log("currentUser")
-
-// console.log(currentUser)
-// console.log("userInfo")
-
-// console.log(userInfo)
 
   if (!isVisible) return null;
 

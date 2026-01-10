@@ -1,67 +1,64 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import { MyContext } from "../../../context/context";
-import Comment from "./Comment";
-import AddComment from "./AddComment";
-import { getCommentsByPost, addComment, updateComment, deleteComment } from "../../../API/commentApi";
-import GeneralAdd from "../../GeneralAdd"
-function MyComment({ postId }) {
-  const { currentUser } = useContext(MyContext);
-  const [comments, setComments] = useState([]);
-  const [newCommentBody, setNewCommentBody] = useState("");
 
-  useEffect(() => {
-    getCommentsByPost(postId).then(data => {
-      const uniqueComments = Array.from(new Map(data.map(c => [c.id, c])).values());
-      setComments(uniqueComments);
-    });
-  }, [postId]);
+function MyComment({ comment, onUpdate, onDelete, commentEmail
+}) {
+    const { currentUser } = useContext(MyContext);
+    const [newBody, setNewBody] = useState(comment.body);
+    const [isEditing, setIsEditing] = useState(false);
+    const [body, setBody] = useState("");
+    const isOwner = comment.email === currentUser.email;
 
-  const handleCommentAdd = async () => {
-    if (!newCommentBody.trim()) return;
-    const newComment = { postId, email: currentUser.email, body: newCommentBody };
-    const saved = await addComment(newComment);
-    if (saved) {
-      setComments([...comments, saved]);
-      setNewCommentBody("");
-    }
-  };
+    const handleSave = () => {
+        onUpdate(comment.id, { body: newBody });
+        setIsEditing(false);
+    };
 
-  const handleCommentUpdate = async (id, updatedFields) => {
-    const updated = await updateComment(id, updatedFields);
-    if (updated) setComments(comments.map(c => c.id === id ? updated : c));
-  };
+    const handleAddComment = async () => {
+        if (!body.trim()) return;
 
-  const handleCommentDelete = async (id) => {
-    const success = await deleteComment(id);
-    if (success) setComments(comments.filter(c => c.id !== id));
-  };
+        const newComment = {
+            postId,
+            email: currentUser.email,
+            body
+        };
 
-  return (
-    <div className="comments-list">
-      {/* <AddComment 
-        body={newCommentBody} 
-        setBody={setNewCommentBody} 
-        onAdd={handleCommentAdd} 
-      /> */}
-      <GeneralAdd
-        value={newCommentBody}
-        setValue={setNewCommentBody}
-        onAdd={handleCommentAdd}
-        placeholder="Add a comment..."
-        buttonText="Add Comment"
-        isTextArea={true} 
-      />
-      {comments.map(comment => (
-        <Comment
-          key={comment.id}
-          comment={comment}
-          onUpdate={handleCommentUpdate}
-          onDelete={handleCommentDelete}
-          commentEmail={comment.email}
-        />
-      ))}
-    </div>
-  );
+        const savedComment = await onAdd(newComment);
+
+        if (savedComment) {
+            onAdd(savedComment);
+            setBody("");
+        }
+    };
+
+    return (
+        <div className="comment">
+            <h6>{commentEmail}</h6>
+            {isEditing ? (
+                <>
+                    <textarea
+                        value={newBody}
+                        onChange={(e) => setNewBody(e.target.value)}
+                    />
+                    <div className="comment-actions">
+                        <button onClick={handleSave}>Save</button>
+                        <button onClick={() => setIsEditing(false)}>Cancel</button>
+                    </div>
+                </>
+            ) : (
+                <>
+                    <p>{comment.body}</p>
+                    {isOwner && (
+                        <div className="comment-actions">
+                            <button className="edit-icon" onClick={() => setIsEditing(true)}></button>
+                            <button className="delete-icon" onClick={() => onDelete(comment.id)}></button>
+                        </div>
+                    )}
+                </>
+            )}
+        </div>
+
+    );
 }
 
 export default MyComment;

@@ -28,7 +28,6 @@ function App() {
               <Home />
             </ProtectedRoute>}>
             <Route path="todos" element={<Todos />} />
-            <Route path="info" element={<Info />} />
             <Route path="posts" element={<Posts />} />
             <Route path="albums" element={<Albums />}>
               <Route path=":albumId/photos" element={<Photos />} />
