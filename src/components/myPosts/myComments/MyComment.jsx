@@ -49,7 +49,7 @@ function MyComment({ postId }) {
         onAdd={handleCommentAdd}
         placeholder="Add a comment..."
         buttonText="Add Comment"
-        isTextArea={true} // כי תגובה היא בדרך כלל ארוכה
+        isTextArea={true} 
       />
       {comments.map(comment => (
         <Comment
@@ -57,6 +57,7 @@ function MyComment({ postId }) {
           comment={comment}
           onUpdate={handleCommentUpdate}
           onDelete={handleCommentDelete}
+          commentEmail={comment.email}
         />
       ))}
     </div>

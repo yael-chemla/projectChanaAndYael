@@ -169,7 +169,6 @@ function MyPost({ post, canEdit, handleDelete, handleUpdate }) {
             {showComments ? "Hide Comments" : "Show Comments"}
           </button>
 
-          {/* קריאה לקומפוננטה החדשה שמרכזת את כל התגובות */}
           {showComments && <MyComment postId={post.id} />}
         </div>
       )}

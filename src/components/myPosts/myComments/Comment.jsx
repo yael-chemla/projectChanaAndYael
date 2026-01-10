@@ -1,7 +1,8 @@
 import { useState, useContext } from "react";
 import { MyContext } from "../../../context/context";
 
-function Comment({ comment, onUpdate, onDelete }) {
+function Comment({ comment, onUpdate, onDelete, commentEmail
+}) {
     const { currentUser } = useContext(MyContext);
     const [newBody, setNewBody] = useState(comment.body);
     const [isEditing, setIsEditing] = useState(false);
@@ -32,6 +33,7 @@ function Comment({ comment, onUpdate, onDelete }) {
 
     return (
         <div className="comment">
+            <h6>{commentEmail}</h6>
             {isEditing ? (
                 <>
                     <textarea

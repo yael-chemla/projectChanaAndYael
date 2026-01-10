@@ -6,6 +6,7 @@ import "../../css/post.css";
 import AddPost from "./AddPost";
 import GeneralSearch  from "../GeneralSearch";
 
+
 function Posts() {
   const { currentUser } = useContext(MyContext);
   const [posts, setPosts] = useState([]);
@@ -66,7 +67,9 @@ function Posts() {
           handleAddPost={handleAddPost}
         />
        <GeneralSearch items={posts} onFilter={setFilteredPosts}/>
+        {/* <SearchPost posts={posts} onFilter={setFilteredPosts} /> */}
       </div>
+
 
       <div className="posts-content">
         {filteredTodos.map(post => (
