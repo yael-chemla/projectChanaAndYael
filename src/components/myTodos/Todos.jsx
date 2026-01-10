@@ -3,16 +3,15 @@ import { MyContext } from "../../context/context";
 import { getTodosByUser, addTodo, deleteTodo, updateTodoTitle, toggleTodoCompleted } from "../../API/todosApi";
 import "../../css/todos.css";
 import MyTodo from "./MyTodo";
-import AddTodo from "./AddTodo";
-import Select from "./Select";
-import GeneralSearch from "../GeneralSearch";
+import SearchTodos from "./SearchTodos";
 import GeneralAdd from "../GeneralAdd"
+import SelectTodo from "./SelectTodo";
 
 function Todos() {
     const { currentUser } = useContext(MyContext);
-    const [todos, setTodos] = useState([]);
-    const [filteredTodos, setFilteredTodos] = useState([]);
-    const [newTitle, setNewTitle] = useState("");
+    const [todos, setTodos] = useState([]);//מערך של כל המשימות
+    const [filteredTodos, setFilteredTodos] = useState([]);//המערך של המשימות שמוצג על המסך ( בגלל הסינונים..)
+    const [newTitle, setNewTitle] = useState("");//הכותרת של הוספת משימה
 
     useEffect(() => {
         if (!currentUser) return;
@@ -21,12 +20,12 @@ function Todos() {
             setFilteredTodos(data);
         });
     }, [currentUser]);
-
+    //פונקציה של עדכון מצב ביצוע
     const handleToggleCompleted = async (id) => {
         const todo = todos.find(t => t.id === id);
-
+        //עדכון ב DB
         const updated = await toggleTodoCompleted(id, !todo.completed);
-
+        //עדכון המערך המשימות פה
         const newTodos = todos.map(t =>
             t.id === id ? updated : t
         );
@@ -34,15 +33,15 @@ function Todos() {
         setTodos(newTodos);
         setFilteredTodos(newTodos);
     };
-
-    const handleDelete = async (id) => {
+    //מחיקת משימה
+    const handleDeleteTodo = async (id) => {
         await deleteTodo(id);
 
         const newTodos = todos.filter(t => t.id !== id);
         setTodos(newTodos);
         setFilteredTodos(newTodos);
     };
-
+    //עדכון כותרת
     const handleUpdateTitle = async (id, newTitle) => {
         if (!newTitle) return;
 
@@ -55,7 +54,7 @@ function Todos() {
         setTodos(newTodos);
         setFilteredTodos(newTodos);
     };
-
+    //הוספת משימה
     const handleAddTodo = async () => {
         if (!newTitle) return;
 
@@ -71,44 +70,21 @@ function Todos() {
         setFilteredTodos(newTodos);
         setNewTitle("");
     };
-    const showCompleted = () => {
-        const filtered = todos.filter(t => t.completed === true);
-        setFilteredTodos(filtered);
-    };
-
-    const showNotCompleted = () => {
-        const filtered = todos.filter(t => t.completed === false);
-        setFilteredTodos(filtered);
-    };
-
     return (
         <div className="todos-page">
 
             <div className="todos-sidebar">
-                {/* <AddTodo
-                    handleAddTodo={handleAddTodo}
-                    setNewTitle={setNewTitle}
-                    newTitle={newTitle}
-                /> */}
-
-                <br></br>
                 <GeneralAdd
                     value={newTitle}
                     setValue={setNewTitle}
                     onAdd={handleAddTodo}
                     placeholder="New todo title"
                     buttonText="Add Todo"
-                    isTextArea={false} // Todo זה בדרך כלל שורה אחת (Input)
+                    isTextArea={false}
                 />
-                <Select todos={todos} onFilter={setFilteredTodos} />
+                <SelectTodo todos={todos} onFilter={setFilteredTodos} />
+                <SearchTodos todos={todos} onFilter={setFilteredTodos} />
                 <br></br>
-                <GeneralSearch items={todos} onFilter={setFilteredTodos} />
-                <div>
-                    <button onClick={showCompleted}>completed</button>
-                    <button onClick={showNotCompleted} style={{ marginLeft: "5px" }}>
-                        not completed
-                    </button>
-                </div>
             </div>
 
             <main className="todos-content">
@@ -119,7 +95,7 @@ function Todos() {
                             todo={todo}
                             handleToggleCompleted={handleToggleCompleted}
                             handleUpdateTitle={handleUpdateTitle}
-                            handleDelete={handleDelete}
+                            handleDelete={handleDeleteTodo}
                         />
                     ))}
                 </div>

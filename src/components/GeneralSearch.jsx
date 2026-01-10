@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 function GeneralSearch({ items, onFilter }) {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState("");//התוכן שרשמת
 
   const showAll = () => {
     onFilter(items);

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function Select({ todos, onFilter }) {
+function SelectTodo({ todos, onFilter }) {
   const [sortBy, setSortBy] = useState("id");
 
   const handleSortChange = (e) => {
@@ -32,4 +32,4 @@ function Select({ todos, onFilter }) {
   );
 }
 
-export default Select;
+export default SelectTodo;

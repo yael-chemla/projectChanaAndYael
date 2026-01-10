@@ -2,11 +2,11 @@ import { useState, useEffect, useContext } from "react";
 import Comments from "./myComments/Comments";
 
 function MyPost({ post, canEdit, handleDelete, handleUpdate }) {
-  const [showFullPost, setShowFullPost] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
-  const [newBody, setNewBody] = useState(post.body);
-  const [showComments, setShowComments] = useState(false);
-
+  const [showFullPost, setShowFullPost] = useState(false);//הצגת כל תוכן פוסט
+  const [isEditing, setIsEditing] = useState(false);//האם לחצו על עריכת פוסט
+  const [newBody, setNewBody] = useState(post.body);//גוף פוסט
+  const [showComments, setShowComments] = useState(false);//הצגת תגובות 
+//שמירה לאחר עריכת פוסט
   const handleSave = () => {
     handleUpdate(post.id, { body: newBody });
     setIsEditing(false);

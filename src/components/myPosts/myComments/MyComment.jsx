@@ -1,34 +1,15 @@
 import { useState, useContext } from "react";
 import { MyContext } from "../../../context/context";
 
-function MyComment({ comment, onUpdate, onDelete, commentEmail
-}) {
+function MyComment({ comment, onUpdate, onDelete, commentEmail}) {
     const { currentUser } = useContext(MyContext);
-    const [newBody, setNewBody] = useState(comment.body);
-    const [isEditing, setIsEditing] = useState(false);
-    const [body, setBody] = useState("");
-    const isOwner = comment.email === currentUser.email;
-
+    const [newBody, setNewBody] = useState(comment.body);//גוף התגובה
+    const [isEditing, setIsEditing] = useState(false);//האם לחצו על עריכה
+    const isOwner = comment.email === currentUser.email;//האם התגובה של המשתמש הנוכחי
+//שמירה לאחר עריכה
     const handleSave = () => {
         onUpdate(comment.id, { body: newBody });
         setIsEditing(false);
-    };
-
-    const handleAddComment = async () => {
-        if (!body.trim()) return;
-
-        const newComment = {
-            postId,
-            email: currentUser.email,
-            body
-        };
-
-        const savedComment = await onAdd(newComment);
-
-        if (savedComment) {
-            onAdd(savedComment);
-            setBody("");
-        }
     };
 
     return (

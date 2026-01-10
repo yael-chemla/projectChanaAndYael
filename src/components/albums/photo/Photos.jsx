@@ -5,12 +5,12 @@ import MyPhoto from "./MyPhoto";
 import "../../../css/photos.css"
 import AddPhoto from "../photo/AddPhoto";
 
-const LIMIT = 6;
+const LIMIT = 6;//כמה תמונות להביא כל פעם
 
 function Photos() {
   const { albumId } = useParams();
 
-  const [photos, setPhotos] = useState([]);
+  const [photos, setPhotos] = useState([]);//כל התמונות 
   const [start, setStart] = useState(0);       // מאיפה להביא
   const [hasMore, setHasMore] = useState(true); // יש עוד תמונות?
   const [loading, setLoading] = useState(false);
@@ -25,7 +25,7 @@ function Photos() {
     setHasMore(true);
     loadMorePhotos(0);
   }, [albumId]);
-
+  //טעינת התמונות של האלבום הנבחר
   const loadMorePhotos = async (currentStart = start) => {
     if (loading || !hasMore) return;
 
@@ -36,7 +36,7 @@ function Photos() {
     setPhotos(prev => [...prev, ...newPhotos]);
     setStart(prev => prev + newPhotos.length);
 
-    if (newPhotos.length === 0 || newPhotos.length < LIMIT) {
+    if (newPhotos.length < LIMIT) {
       setHasMore(false);
     }
 
@@ -44,16 +44,17 @@ function Photos() {
   };
 
 
-
+  //מחיקת תמונה
   const handleDeletePhoto = async (id) => {
     await deletePhoto(id);
     setPhotos(prev => prev.filter(p => p.id !== id));
   };
-
+  //עדכון URL של תמונה
   const handleUpdatePhotoUrl = async (id, newUrl) => {
     const updated = await updatePhotoUrl(id, newUrl);
     setPhotos(prev => prev.map(p => (p.id === id ? updated : p)));
   };
+  //הוספת תמונה
   const handleAddPhoto = async () => {
     if (!newTitle.trim() || !newUrl.trim()) return;
 
@@ -83,7 +84,7 @@ function Photos() {
         ))}
 
       </div>
-      {hasMore && (
+      {hasMore && !loading && (
         <button onClick={() => loadMorePhotos()} disabled={loading}>
           {loading ? "Loading..." : "Load more"}
         </button>

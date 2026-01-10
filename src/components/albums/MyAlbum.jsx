@@ -10,9 +10,7 @@ function MyAlbum({ album }) {
       <div className="album-id">#{album.id}</div>
 
       <Link
-        to={`/home/users/${currentUser.id}/albums/${album.id}/photos`}
-        className="album-link"
-      >
+        to={`/home/users/${currentUser.id}/albums/${album.id}/photos`} className="album-link">
         <div className="album-title">{album.title}</div>
       </Link>
     </div>

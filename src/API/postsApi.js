@@ -39,4 +39,5 @@ export const deletePost = async (postId) => {
 // עדכון תוכן 
 export const updatePost = async (id, updatedFields) => {
   return updateItem(id, updatedFields, "posts")
+
 };

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import GeneralSearch from "../GeneralSearch";
 
 function SearchTodos({ todos, onFilter }) {
@@ -16,12 +15,9 @@ function SearchTodos({ todos, onFilter }) {
   return (
     <>
       <GeneralSearch items={todos} onFilter={onFilter} />
-
       <div>
         <button onClick={showCompleted}>completed</button>
-        <button onClick={showNotCompleted} >
-          not completed 
-        </button>
+        <button onClick={showNotCompleted} > not completed  </button>
       </div>
     </>
   );

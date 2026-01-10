@@ -1,15 +1,10 @@
 
 import { useState } from "react";
 
-function MyTodo({
-  todo,
-  handleToggleCompleted,
-  handleUpdateTitle,
-  handleDelete
-}) {
-  const [isEditing, setIsEditing] = useState(false);
+function MyTodo({todo,handleToggleCompleted,handleUpdateTitle,handleDelete}) {
+  const [isEditing, setIsEditing] = useState(false);//האם לחצו על עריכה
   const [newTitle, setNewTitle] = useState(todo.title);
-
+//עדכון משימה
   function onConfirmEdit() {
     handleUpdateTitle(todo.id, newTitle);
     setIsEditing(false);

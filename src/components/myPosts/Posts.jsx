@@ -4,16 +4,16 @@ import { getPosts, deletePost, addPost, updatePost } from "../../API/postsApi";
 import MyPost from "./MyPost";
 import "../../css/post.css";
 import AddPost from "./AddPost";
-import GeneralSearch  from "../GeneralSearch";
+import GeneralSearch from "../GeneralSearch";
 
 
 function Posts() {
   const { currentUser } = useContext(MyContext);
-  const [posts, setPosts] = useState([]);
-  const [newTitle, setNewTitle] = useState("");
-  const [newBody, setNewBody] = useState("");
-  const [selectedPostId, setSelectedPostId] = useState(null);
-  const [filteredTodos, setFilteredPosts] = useState([]);
+  const [posts, setPosts] = useState([]);//מערך של כל הפוסטים
+  const [newTitle, setNewTitle] = useState("");//כותרת הפוסט
+  const [newBody, setNewBody] = useState("");//גוף הפוסט
+  const [selectedPostId, setSelectedPostId] = useState(null);//הצגת הפוסט
+  const [filteredPosts, setFilteredPosts] = useState([]);//הפוסטים שמוצגים על המסך
 
   useEffect(() => {
     if (!currentUser) return;
@@ -22,16 +22,15 @@ function Posts() {
       setFilteredPosts(data);
     });
   }, [currentUser]);
-
-  const handleDelete = async (id) => {
+  //מחיקת פוסט
+  const handleDeletePost = async (id) => {
     await deletePost(id);
-
     const newPosts = posts.filter(t => t.id !== id);
     setPosts(newPosts);
     setFilteredPosts(newPosts);
   };
-
-  const handleUpdate = async (id, updatedFields) => {
+  //עדכון פוסט
+  const handleUpdatePost = async (id, updatedFields) => {
     const updatedPost = await updatePost(id, updatedFields);
 
     const newPosts = posts.map(p =>
@@ -41,7 +40,7 @@ function Posts() {
     setPosts(newPosts);
     setFilteredPosts(newPosts);
   };
-
+  //הוספת פוסט
   const handleAddPost = async () => {
     const newPost = await addPost({
       title: newTitle,
@@ -66,21 +65,19 @@ function Posts() {
           setNewBody={setNewBody}
           handleAddPost={handleAddPost}
         />
-       <GeneralSearch items={posts} onFilter={setFilteredPosts}/>
-        {/* <SearchPost posts={posts} onFilter={setFilteredPosts} /> */}
+        <GeneralSearch items={posts} onFilter={setFilteredPosts} />
       </div>
 
-
       <div className="posts-content">
-        {filteredTodos.map(post => (
+        {filteredPosts.map(post => (
           <MyPost
             key={post.id}
             post={post}
             isSelected={post.id === selectedPostId}
             onSelect={() => setSelectedPostId(post.id)}
             canEdit={Number(post.userId) === Number(currentUser.id)}
-            handleDelete={handleDelete}
-            handleUpdate={handleUpdate}
+            handleDelete={handleDeletePost}
+            handleUpdate={handleUpdatePost}
           />
         ))}
       </div>
